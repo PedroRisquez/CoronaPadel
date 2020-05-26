@@ -12,6 +12,7 @@
         <title><s:text name="paginaPrincipal"></s:text> - CoronaPadel</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
+            <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons%22%3E">
             <link rel="icon" href="vistas/trophy.png" type="image/png"/>
         </head>
@@ -19,8 +20,9 @@
         <s:set name="usuario" value="%{#session.usuario}"></s:set>
         <s:include value="header.jsp"></s:include>  
         <s:if test="#usuario.rol=='Arbitro'">
+              <s:if test="!listaDePartidosArbitro.isEmpty()">
             <s:action name="gestionPartidoAction"></s:action>
-            <h1><s:text name="partidosDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h1> 
+            <h2><s:text name="partidosDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2> 
 
                 <table border="1">
                     <thead>
@@ -58,7 +60,7 @@
                     </s:iterator>
                 </tbody>
             </table>
-
+              </s:if>
             <s:if test="partido!=null">
                 <s:form action="modificarPartidoAction">
                     <s:textfield label="Duracion" name="duracion" value="%{partido.duracion}"></s:textfield>

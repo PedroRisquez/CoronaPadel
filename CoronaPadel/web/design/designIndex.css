@@ -1,0 +1,436 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25-may-2020, 11:07:47
+    Author     : paula
+*/
+
+
+
+/*footer*/
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.0.3');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+#footer .actions{
+    padding-left:0;
+}
+
+#footer h2 {
+    color: black;
+}
+
+#footer .icon {
+    color: black;
+}
+
+#footer a {
+    color: black;
+    text-decoration: none;
+}
+
+#footer ul {
+    margin:0;
+}
+
+#footer ul li {
+    list-style: none;
+}
+
+#footer .copyright {
+    display: inline-block;
+    color: black;
+    font-size: 0.75em;
+    margin: 0 0 2em 0;
+    padding: 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 2em 10em;
+}
+.fa-lg {
+    font-size: 1em;
+    color:black;
+
+
+}
+.fa {
+    font-family: FontAwesome;
+    position: relative;
+    display: table-cell;
+    width: 55px;
+    height: 36px;
+    text-align: center;
+    top:12px; 
+    font-size:20px;
+}
+
+
+@media screen and (max-width: 980px) {
+
+    #footer {
+        padding: 3em 0 1em 0;
+        width: 99%;
+    }
+
+    #footer ul li {
+        display: block;
+        padding: .25em 0;
+
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    #footer .copyright {
+        padding: 2em 5em;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    #footer {
+        padding: 2em 0 0.1em 0;
+    }
+
+    #footer ul li {
+        font-size: .9em;
+    }
+
+    #footer ul li .icon:before {
+        margin-left: -1em;
+    }
+
+    #footer .copyright {
+        padding: 2em 0;
+    }
+
+}
+
+
+.inner {
+    margin: 0 auto;
+    max-width: 50%;
+}
+
+
+@media screen and (max-width: 1280px) {
+
+    .inner {
+        max-width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 980px) {
+
+    .inner {
+        max-width: 70%;
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    .inner {
+        max-width: 60%;
+    }
+
+}
+ul {
+    /*    list-style: disc;*/
+    margin: 0 0 0 0;
+    padding-left: 1em;
+}
+
+ul li {
+    /*    padding-left: 0.5em;*/
+}
+
+ul.alt {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.alt li {
+    border-top: solid 1px #dee1e3;
+    padding: 0.5em 0;
+}
+
+ul.alt li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+ul.icons {
+    cursor: default;
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.icons li {
+    display: inline-block;
+    padding: 0 1em 0 0;
+}
+
+ul.icons li:last-child {
+    padding-right: 0;
+}
+
+ul.icons li .icon:before {
+    font-size: 2em;
+}
+
+ul.actions {
+    cursor: default;
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.actions li {
+    display: inline-block;
+    padding: 0 1em 0 0;
+    vertical-align: middle;
+}
+
+ul.actions li:last-child {
+    padding-right: 0;
+}
+
+ul.actions.small li {
+    padding: 0 0.5em 0 0;
+}
+
+ul.actions.vertical li {
+    display: block;
+    padding: 1em 0 0 0;
+}
+
+ul.actions.vertical li:first-child {
+    padding-top: 0;
+}
+
+ul.actions.vertical li > * {
+    margin-bottom: 0;
+}
+
+ul.actions.vertical.small li {
+    padding: 0.5em 0 0 0;
+}
+
+ul.actions.vertical.small li:first-child {
+    padding-top: 0;
+}
+
+ul.actions.fit {
+    display: table;
+    margin-left: -1em;
+    padding: 0;
+    table-layout: fixed;
+    width: calc(100% + 1em);
+}
+
+ul.actions.fit li {
+    display: table-cell;
+    padding: 0 0 0 1em;
+}
+
+ul.actions.fit li > * {
+    margin-bottom: 0;
+}
+
+ul.actions.fit.small {
+    margin-left: -0.5em;
+    width: calc(100% + 0.5em);
+}
+
+ul.actions.fit.small li {
+    padding: 0 0 0 0.5em;
+}
+
+/*@media screen and (max-width: 480px) {
+
+    ul.actions {
+        margin: 0 0 2em 0;
+    }
+
+    ul.actions li {
+        padding: 1em 0 0 0;
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    ul.actions li:first-child {
+        padding-top: 0;
+    }
+
+    ul.actions li > * {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    ul.actions li > *.icon:before {
+        margin-left: -2em;
+    }
+
+    ul.actions.small li {
+        padding: 0.5em 0 0 0;
+    }
+
+    ul.actions.small li:first-child {
+        padding-top: 0;
+    }
+
+}*/
+
+
+/* Icon */
+
+.icon {
+    text-decoration: none;
+    border-bottom: none;
+    position: relative;
+}
+
+.icon:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
+}
+
+.icon > .label {
+    display: none;
+}
+
+
+/*header*/
+
+
+.brandingImgWrap {
+    height: 100px;
+    padding-left: 1px;
+    padding-top: 1px;
+    float:left;
+    padding-left: 2px;
+
+}
+.brandingImgWrap {
+    overflow: hidden;
+}
+
+/*header formulario*/
+
+.botones{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ddd7c8;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 40px
+}
+
+.botones  li  {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px;
+}
+
+/* Change the link color to #111 (black) on hover */
+.botones li:hover {
+    background-color: #111;
+}
+body{
+    width: 99%;
+    background-image:url("fondo.png");
+    background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*header formulario registrado*/
+
+.botones2{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ddd7c8;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 40px
+}
+
+.botones2  li  {
+    float: right;
+    display: inline;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px;
+    height: 40px;
+}
+
+/* Change the link color to #111 (black) on hover */
+.botones2 li:hover {
+    background-color: #111;
+}
+
+.brandingImgWrap2 {
+    height: 40px;
+    padding-left: 1px;
+    padding-top: 1px;
+    float:left;
+    padding-left: 2px;
+    z-index: 30;
+
+}
+.brandingImgWrap2 {
+    overflow: hidden;
+}
+
+/*inscripcion*/
+#inscripciones{
+    margin-top: 60px;
+    position: absolute;
+    background-color: white;
+    opacity: 80%;
+    
+}
+header{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    transition: padding-top .3s,padding-bottom .3s;
+    border: none;
+    background-color: #ddd7c8;
+    width: 99%;
+    position:fixed;
+    height: 50px;
+
+
+}
+
+#footer {
+    margin-top: 200px;
+    background: #ddd7c8;
+    text-align: center;
+    color: black;
+    width: 99%;
+    clear: both;
+    position: absolute;
+    bottom: 0;
+}

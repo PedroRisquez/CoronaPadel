@@ -1,0 +1,216 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <constant name="struts.ui.theme" value="simple" />
+    <package name="default" extends="struts-default">
+        <action name="">
+            <result type="chain">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+    </package>
+    <package name="principal" extends="struts-default">
+        <action name="index">
+            <result type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
+        </action>
+        <action name="cargaRegistroAction" class="Acciones.principal.cargaRegistroAction">
+            <result name="success">/vistas/registro.jsp</result>
+        </action>
+        <action name="registroAction" class="Acciones.principal.registroAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/vistas/index.jsp</result> 
+            <result name="error">/vistas/registro.jsp</result> 
+            <result name="input">/vistas/registro.jsp</result> 
+        </action>
+        <action name="loginAction" class="Acciones.principal.loginAction">
+            <result name="success">/vistas/index.jsp</result> 
+            <result name="arbitro" type="chain">
+                <param name="actionName">gestionPartidoAction</param>
+            </result>
+            <result name="jugador" type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
+            <result name="error">/vistas/login.jsp</result> 
+            <result name="input">/vistas/login.jsp</result> 
+        </action>
+        <action name="logoutAction" class="Acciones.principal.logoutAction">
+            <result name="success" type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
+        </action>
+        <action name="irUsuarioAction" class="Acciones.principal.irUsuarioAction"> 
+            <result name="success">/vistas/GestionUsuario/usuario.jsp</result>
+            <result name="error">/vistas/index.jsp</result>
+        </action>
+    </package>
+    <package name="usuario" extends="struts-default">
+        <action name="cargarCompeticionesInscripcion" class="Acciones.usuario.cargarCompeticionesInscripcion">
+            <result name="success">/vistas/index.jsp</result>
+        </action>
+        <action name="inscribirse1Action" class="Acciones.usuario.inscribirse1Action">
+            <result name="success">/vistas/GestionCompeticion/seleccionarParejaInscripcion.jsp</result>
+        </action>
+        <action name="inscribirse2Action" class="Acciones.usuario.inscribirse2Action">
+            <result name="success" type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
+        </action>
+        <action name="mostrarFormularioModificarUsuarioAction" class="Acciones.usuario.modificarUsuarioAction" method="mostrarFormulario">
+            <result name="success">/vistas/GestionUsuario/modificarUsuario.jsp</result>
+        </action>
+        <action name="modificarUsuarioAction" class="Acciones.usuario.modificarUsuarioAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                                </param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/vistas/GestionUsuario/usuario.jsp</result>
+            <result name="input">/vistas/GestionUsuario/modificarUsuario.jsp</result>
+        </action>
+        <!--gestion parejas-->
+        <action name="irParejas" class="Acciones.usuario.mostrarParejasAction">
+            <result name="success">/vistas/GestionUsuario/pareja.jsp</result>
+        </action>
+        <action name="irFormParejaAction" class="Acciones.usuario.irFormParejaAction">
+            <result name="success">/vistas/GestionUsuario/altaPareja.jsp</result>
+        </action>
+        <action name="filtraUsuarioPareja" class="Acciones.usuario.irFormParejaAction" method="filtro">
+            <result name="success">/vistas/GestionUsuario/altaPareja.jsp</result>
+        </action>
+        <action name="irFinAltaParejaAction" class="Acciones.usuario.altaParejaAction" method="seleccionarPareja">
+            <result name="success">/vistas/GestionUsuario/finAltaPareja.jsp</result>
+            <result name="input">/vistas/GestionUsuario/altaPareja.jsp</result>
+        </action>
+        <action name="altaParejaAction" class="Acciones.usuario.altaParejaAction">
+            <result name="success">/vistas/GestionUsuario/pareja.jsp</result>
+            <result name="input">/vistas/GestionUsuario/finAltaPareja.jsp</result>
+        </action>
+        <action name="seleccionarModificarParejaAction" class="Acciones.usuario.seleccionarModificarParejaAction">
+            <result name="success">/vistas/GestionUsuario/modificarPareja.jsp</result>
+        </action>
+        <action name="modificarParejaAction" class="Acciones.usuario.modificarParejaAction">
+            <result name="success">/vistas/GestionUsuario/pareja.jsp</result>
+            <result name="input">/vistas/GestionUsuario/modificarPareja.jsp</result>
+        </action>
+    </package>
+    <!--Competicion-->
+    <package name="competicion" extends="struts-default">
+        <action name="irCreaCompeticionAction" class="Acciones.competicion.mostrarFormAltaCompeticion">
+            <result name="success">/vistas/GestionCompeticion/formAltaCompeticion.jsp</result>
+        </action>
+        <action name="creaCompeticionAction" class="Acciones.competicion.creaCompeticionAction">
+            <result name="success" type="chain">
+                <param name="actionName">completaCompeticionAction</param>
+            </result>
+            <result name="input">/vistas/GestionCompeticion/formAltaCompeticion.jsp</result>
+        </action>
+        <action name="completaCompeticionAction" class="Acciones.competicion.completaCompeticionAction">
+            <result name="success">/vistas/GestionCompeticion/completarCompeticion.jsp</result>
+        </action>
+        <action name="finCompletaCompeticionAction" class="Acciones.competicion.completaCompeticionAction" method="asignaParejas">
+            <result name="success">/vistas/index.jsp</result>
+            <result name="input">/vistas/GestionCompeticion/completarCompeticion.jsp</result>
+        </action>
+        <action name="gestionCompeticionAction" class="Acciones.competicion.gestionCompeticionAction">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+        </action>
+        <action name="eliminarCompeticionAction" class="Acciones.competicion.eliminarCompeticion">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+        </action>
+        <action name="informacionExtraCompeticionAction" class="Acciones.competicion.gestionCompeticionAction" method="verInformacionExtra">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+        </action>
+        <action name="listadoPartidosCompeticionAction" class="Acciones.competicion.gestionCompeticionAction" method="verPartidos">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+        </action>
+        <action name="modificarCompeticionAction" class="Acciones.competicion.modificarCompeticionAction">
+            <result name="success">/vistas/GestionCompeticion/modificarCompeticion.jsp</result>
+        </action>
+         <action name="terminarModificarCompeticionAction" class="Acciones.competicion.modificarCompeticionAction" method="modificaCompeticion">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+            <result name="input">/vistas/GestionCompeticion/modificarCompeticion.jsp</result>
+        </action>
+        <action name="verRankingCompeticionAction" class="Acciones.competicion.gestionCompeticionAction" method="verRanking">
+            <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
+        </action>
+        <!--empezamos las acciones de Partidos-->
+       <action name="eliminarPartidoAction" class="Acciones.competicion.gestionPartidoAction" method="eliminarPartido">
+            <result name="success" type="chain">
+                <param name="actionName">gestionCompeticionAction</param>
+            </result>
+        </action>
+        <action name="gestionPartidoAction" class="Acciones.competicion.gestionPartidoAction">
+            <result name="success">/vistas/index.jsp</result>
+        </action>
+        <action name="mostrarModificarPartidoAction" class="Acciones.competicion.gestionPartidoAction" method="mostrarModificarPartidoAction">
+            <result name="success">/vistas/GestionCompeticion/arbitroPartido.jsp</result>
+        </action>
+        <action name="modificarPartidoAction" class="Acciones.competicion.modificarPartidoAction">
+            <result name="success" type="chain">
+                <param name="actionName">gestionPartidoAction</param>
+            </result>
+            <result name="input">/vistas/GestionCompeticion/arbitroPartido.jsp</result>
+        </action>
+        <action name="eliminarResultadoAction" class="Acciones.competicion.gestionPartidoAction" method="eliminarResultado">
+            <result name="success" type="chain">
+                <param name="actionName">gestionCompeticionAction</param>
+            </result>
+        </action>
+        <!--empezamos las acciones de Ranking-->
+       <action name="eliminarRankingAction" class="Acciones.competicion.gestionRankingAction" method="eliminarRanking">
+            <result name="success" type="chain">
+                <param name="actionName">gestionCompeticionAction</param>
+            </result>
+        </action>
+    </package>
+    <package name="administracion" extends="struts-default">
+        <!-- GESTION ADMINISTRACION -->
+        <action name="irAdministraciones" class="Acciones.administracion.verAdministraciones">
+            <result name="success">/vistas/GestionAdministracion/verAdministraciones.jsp</result>
+        </action>
+        <action name="verAdmin" class="Acciones.administracion.verAdmin">
+            <result name="success">/vistas/GestionAdministracion/verAdmin.jsp</result>
+        </action>
+        <action name="registroAdministracion" class="Acciones.administracion.registroAdmin">
+            <result name="success">/vistas/GestionAdministracion/verAdministraciones.jsp</result>
+            <result name="input">/vistas/GestionAdministracion/formAltaAdmin.jsp</result>
+        </action>
+        <action name="irActualizarAdmin" class="Acciones.administracion.readAdmin">
+            <result name="success">/vistas/GestionAdministracion/formActualizarAdmin.jsp</result>
+        </action>
+        <action name="actualizarAdmin" class="Acciones.administracion.registroAdmin" method="updateAdmin">
+            <result name="success">/vistas/GestionAdministracion/verAdministraciones.jsp</result>
+            <result name="input">/vistas/GestionAdministracion/formActualizarAdmin.jsp</result>
+        </action>
+        <action name="borrarAdmin" class="Acciones.administracion.eliminarAdmin">
+            <result name="success">/vistas/GestionAdministracion/verAdministraciones.jsp</result>
+        </action>
+        <!-- GESTION PISTA -->
+        <action name="irRegistrarPista" class="Acciones.administracion.listasPista">
+            <result name="success">/vistas/GestionAdministracion/formAltaPista.jsp</result>
+        </action>
+        <action name="registroPista" class="Acciones.administracion.registroPista">
+            <result name="success">/vistas/GestionAdministracion/verAdmin.jsp</result>
+            <result name="input">/vistas/GestionAdministracion/formAltaPista.jsp</result>
+        </action>
+        <action name="irActualizarPista" class="Acciones.administracion.readPista">
+            <result name="success">/vistas/GestionAdministracion/formActualizarPista.jsp</result>
+        </action>
+        <action name="actualizarPista" class="Acciones.administracion.registroPista" method ="updatePista">
+            <result name="success">/vistas/GestionAdministracion/verAdmin.jsp</result>
+        </action>
+    </package>
+</struts>

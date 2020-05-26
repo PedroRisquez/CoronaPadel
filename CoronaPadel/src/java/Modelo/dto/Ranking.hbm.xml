@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Ranking" table="ranking" catalog="coronapadel" optimistic-lock="version">
+        <id name="idRanking" type="java.lang.Integer">
+            <column name="idRanking" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="competicion" class="Modelo.dto.Competicion" fetch="select">
+            <column name="idCompeticion" />
+        </many-to-one>
+        <many-to-one name="pareja" class="Modelo.dto.Pareja" fetch="select" lazy="false">
+            <column name="idPareja" />
+        </many-to-one>
+        <property name="puntuacion" type="int">
+            <column name="puntuacion" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

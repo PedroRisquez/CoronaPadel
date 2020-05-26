@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Competicion" table="competicion" catalog="coronapadel" optimistic-lock="version">
+        <id name="idCompeticion" type="java.lang.Integer">
+            <column name="idCompeticion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="administracion" class="Modelo.dto.Administracion" fetch="select" lazy="false">
+            <column name="idAdministracion" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Modelo.dto.Usuario" fetch="select" lazy="false">
+            <column name="dni" length="9" />
+        </many-to-one>
+        <property name="formato" type="string">
+            <column name="formato" length="45" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="timestamp">
+            <column name="fechaInicio" length="19" not-null="true" />
+        </property>
+        <property name="fechaFin" type="timestamp">
+            <column name="fechaFin" length="19" />
+        </property>
+        <property name="npartidos" type="int">
+            <column name="nPartidos" not-null="true" />
+        </property>
+        <property name="nparejas" type="int">
+            <column name="nParejas" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="45" not-null="true" />
+        </property>
+        <property name="privada" type="boolean">
+            <column name="privada" not-null="true" />
+        </property>
+        <set name="partidos" table="partido" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="idCompeticion" />
+            </key>
+            <one-to-many class="Modelo.dto.Partido" />
+        </set>
+        <set name="rankings" table="ranking" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCompeticion" />
+            </key>
+            <one-to-many class="Modelo.dto.Ranking" />
+        </set>
+    </class>
+</hibernate-mapping>

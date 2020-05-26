@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Pareja" table="pareja" catalog="coronapadel" optimistic-lock="version">
+        <id name="idPareja" type="java.lang.Integer">
+            <column name="idPareja" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarioByDni2" class="Modelo.dto.Usuario" fetch="select" lazy="false">
+            <column name="dni2" length="9" />
+        </many-to-one>
+        <many-to-one name="usuarioByDni1" class="Modelo.dto.Usuario" fetch="select" lazy="false">
+            <column name="dni1" length="9" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <set name="resultadosForIdParejaVisitante" table="resultado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idParejaVisitante" />
+            </key>
+            <one-to-many class="Modelo.dto.Resultado" />
+        </set>
+        <set name="rankings" table="ranking" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPareja" />
+            </key>
+            <one-to-many class="Modelo.dto.Ranking" />
+        </set>
+        <set name="resultadosForIdParejaLocal" table="resultado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idParejaLocal" />
+            </key>
+            <one-to-many class="Modelo.dto.Resultado" />
+        </set>
+    </class>
+</hibernate-mapping>

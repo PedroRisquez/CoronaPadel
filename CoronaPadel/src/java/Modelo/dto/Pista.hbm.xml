@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Pista" table="pista" catalog="coronapadel" optimistic-lock="version">
+        <id name="idPista" type="java.lang.Integer">
+            <column name="idPista" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="administracion" class="Modelo.dto.Administracion" fetch="select" lazy="false">
+            <column name="idAdministracion" />
+        </many-to-one>
+        <property name="localizacion" type="string">
+            <column name="localizacion" length="45" not-null="true" />
+        </property>
+        <property name="tipoDeCubierta" type="string">
+            <column name="tipoDeCubierta" length="45" not-null="true" />
+        </property>
+        <property name="tipoDePista" type="string">
+            <column name="tipoDePista" length="45" not-null="true" />
+        </property>
+        <property name="tipoDeSuelo" type="string">
+            <column name="tipoDeSuelo" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

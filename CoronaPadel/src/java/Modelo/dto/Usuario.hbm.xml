@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Usuario" table="usuario" catalog="coronapadel" optimistic-lock="version">
+        <id name="dni" type="string">
+            <column name="dni" length="9" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreCompleto" type="string">
+            <column name="nombreCompleto" length="150" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="45" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="45" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="45" not-null="true" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="20" not-null="true" />
+        </property>
+        <property name="categoria" type="string">
+            <column name="categoria" length="45" />
+        </property>
+        <property name="ladoDeJuego" type="string">
+            <column name="ladoDeJuego" length="45" />
+        </property>
+        <property name="fotoPerfil" type="string">
+            <column name="fotoPerfil" length="100" />
+        </property>
+        <set name="partidos" table="partido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dniArbitro" length="9" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.dto.Partido" />
+        </set>
+        <set name="administracions" table="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dniAdministrador" length="9" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.dto.Administracion" />
+        </set>
+        <set name="competicions" table="competicion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni" length="9" />
+            </key>
+            <one-to-many class="Modelo.dto.Competicion" />
+        </set>
+        <set name="parejasForDni2" table="pareja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni2" length="9" />
+            </key>
+            <one-to-many class="Modelo.dto.Pareja" />
+        </set>
+        <set name="parejasForDni1" table="pareja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni1" length="9" />
+            </key>
+            <one-to-many class="Modelo.dto.Pareja" />
+        </set>
+        <set name="clasificacionglobals" table="clasificacionglobal" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="dni" length="9" />
+            </key>
+            <one-to-many class="Modelo.dto.Clasificacionglobal" />
+        </set>
+    </class>
+</hibernate-mapping>

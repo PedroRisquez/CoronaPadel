@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Partido" table="partido" catalog="coronapadel" optimistic-lock="version">
+        <id name="idPartido" type="java.lang.Integer">
+            <column name="idPartido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="competicion" class="Modelo.dto.Competicion" fetch="select" lazy="false">
+            <column name="idCompeticion" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Modelo.dto.Usuario" fetch="select" lazy="false">
+            <column name="dniArbitro" length="9" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="timestamp">
+            <column name="fechaInicio" length="19" not-null="true" />
+        </property>
+        <property name="duracion" type="int">
+            <column name="duracion" not-null="true" />
+        </property>
+        <set name="resultados" table="resultado" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="idPartido" />
+            </key>
+            <one-to-many class="Modelo.dto.Resultado" />
+        </set>
+    </class>
+</hibernate-mapping>

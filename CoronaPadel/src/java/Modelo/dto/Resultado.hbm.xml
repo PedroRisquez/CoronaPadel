@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Resultado" table="resultado" catalog="coronapadel" optimistic-lock="version">
+        <id name="idResultado" type="java.lang.Integer">
+            <column name="idResultado" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="parejaByIdParejaVisitante" class="Modelo.dto.Pareja" fetch="select" lazy="false">
+            <column name="idParejaVisitante" />
+        </many-to-one>
+        <many-to-one name="parejaByIdParejaLocal" class="Modelo.dto.Pareja" fetch="select" lazy="false">
+            <column name="idParejaLocal" />
+        </many-to-one>
+        <many-to-one name="partido" class="Modelo.dto.Partido" fetch="select" lazy = "false">
+            <column name="idPartido" />
+        </many-to-one>
+        <property name="puntuacionLocal" type="int">
+            <column name="puntuacionLocal" not-null="true" />
+        </property>
+        <property name="puntuacionVisitante" type="int">
+            <column name="puntuacionVisitante" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

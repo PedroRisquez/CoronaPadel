@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-abr-2020 12:53:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.dto.Clasificacionglobal" table="clasificacionglobal" catalog="coronapadel" optimistic-lock="version">
+        <id name="idClasificacionGlobal" type="java.lang.Integer">
+            <column name="idClasificacionGlobal" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="administracion" class="Modelo.dto.Administracion" fetch="select" lazy="false">
+            <column name="idAdministracion" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Modelo.dto.Usuario" fetch="select" lazy="false">
+            <column name="dni" length="9" />
+        </many-to-one>
+        <property name="puntuacion" type="int">
+            <column name="puntuacion" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -25,11 +25,11 @@
         <s:else>
             <h4><s:text name="sinFoto"></s:text></h4>
         </s:else>
-        <h2>Datos</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th><s:text name="vista.usuario.dni"></s:text></th>
+        <h2><s:text name="datos"></s:text></h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th><s:text name="vista.usuario.dni"></s:text></th>
                     <th><s:text name="vista.usuario.nombre"></s:text></th>
                     <th><s:text name="vista.usuario.usuario"></s:text></th>
                     <th><s:text name="vista.usuario.email"></s:text></th>
@@ -65,6 +65,9 @@
             <s:form action="irParejas">
                 <s:submit key="misParejas"></s:submit>
             </s:form>  
+            <s:form action="competicionesJugador">
+                <s:submit key="misCompeticiones"></s:submit>
+            </s:form>
         </s:if>
         <s:include value="../footer.jsp"></s:include>
     </body>

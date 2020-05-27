@@ -1,11 +1,10 @@
 <%-- 
-    Document   : competicion
-    Created on : 15-abr-2020, 12:38:12
-    Author     : paula
+    Document   : misCompeticiones
+    Created on : 27-may-2020, 11:21:36
+    Author     : Nerea
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +19,6 @@
     <body>
         <s:include value="../header.jsp"></s:include>
         <h2><s:text name="competicion.verDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2>  
-            <!--filtrado-->
         <s:if test ="!listaCompeticion.isEmpty()">
             <table border="1" style="left: 200px;top: 120px;">
                 <thead>
@@ -28,10 +26,8 @@
                         <th><s:text name="competicion.nombre"></s:text></th>
                         <th><s:text name="competicion.descripcion"></s:text></th>
                         <th><s:text name="competicion.masInfo"></s:text></th>
-                        <th><s:text name="botonActualizar"></s:text></th>
                         <th><s:text name="competicion.verPartidos"></s:text></th>
                         <th><s:text name="competicion.verRanking"></s:text></th>
-                        <th><s:text name="botonBorrar"></s:text></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,33 +35,22 @@
                         <tr>
                             <td><s:property value="nombre"></s:property></td>
                             <td><s:property value="descripcion"></s:property></td>
-                            <td><s:form action="informacionExtraCompeticionAction">
+                            <td><s:form action="extraInfo">
                                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                                     <s:submit key="info"></s:submit>
                                 </s:form>
                             </td>
-                                <td>
-                                    <s:form action="modificarCompeticionAction">
-                                        <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
-                                        <s:submit key="botonActualizar"></s:submit>
-                                    </s:form>
-                                </td>
+                                
                             <td>
-                                <s:form action="listadoPartidosCompeticionAction">
+                                <s:form action="verPartidos">
                                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                                     <s:submit key="partidos"></s:submit>
                                 </s:form>
                             </td>
                             <td>
-                                <s:form action="verRankingCompeticionAction">
+                                <s:form action="verRankingJugador">
                                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                                     <s:submit key="ranking"></s:submit>
-                                </s:form>
-                            </td>
-                            <td>
-                                <s:form action = "eliminarCompeticionAction">
-                                    <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
-                                    <s:submit key="botonBorrar"></s:submit>
                                 </s:form>
                             </td>
                         </tr>
@@ -116,9 +101,17 @@
                         <tbody>
                         <s:iterator value="listaRanking">
                             <tr>
+                            <s:if test="%{pareja.usuarioByDni1.nombreCompleto == #usuario.nombreCompleto or 
+                                  pareja.usuarioByDni2.nombreCompleto == #usuario.nombreCompleto}">
+                                <td style="font-weight: bold;"><s:property value="pareja.nombre"></s:property></td>   
+                                    <td style="font-weight: bold;"><s:property value="puntuacion"></s:property></td>
+                            </s:if>
+                            <s:else>
                                 <td><s:property value="pareja.nombre"></s:property></td>   
                                 <td><s:property value="puntuacion"></s:property></td>
-                                </tr>
+                            </s:else>
+                                
+                            </tr>
                         </s:iterator>
                     </tbody>
                 </table>

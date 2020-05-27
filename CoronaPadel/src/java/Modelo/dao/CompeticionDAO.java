@@ -83,5 +83,4 @@ public class CompeticionDAO implements ICompeticionDAO {
         tx.commit();
         return listaDeCompeticionPorAdministrador;
     }
-
 }

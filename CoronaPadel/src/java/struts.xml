@@ -146,6 +146,18 @@
         <action name="verRankingCompeticionAction" class="Acciones.competicion.gestionCompeticionAction" method="verRanking">
             <result name="success">/vistas/GestionCompeticion/competicion.jsp</result>
         </action>
+        <action name="competicionesJugador" class="Acciones.competicion.competicionesJugador">
+            <result name="success">/vistas/GestionCompeticion/misCompeticiones.jsp</result>
+        </action>
+        <action name="extraInfo" class="Acciones.competicion.competicionesJugador" method="verInformacionExtra">
+            <result name="success">/vistas/GestionCompeticion/misCompeticiones.jsp</result>
+        </action>
+        <action name="verPartidos" class="Acciones.competicion.competicionesJugador" method ="verPartidos">
+            <result name="success">/vistas/GestionCompeticion/misCompeticiones.jsp</result>
+        </action>
+        <action name="verRankingJugador" class="Acciones.competicion.competicionesJugador" method ="verRanking">
+            <result name="success">/vistas/GestionCompeticion/misCompeticiones.jsp</result>
+        </action>
         <!--empezamos las acciones de Partidos-->
        <action name="eliminarPartidoAction" class="Acciones.competicion.gestionPartidoAction" method="eliminarPartido">
             <result name="success" type="chain">

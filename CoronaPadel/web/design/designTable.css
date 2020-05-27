@@ -16,14 +16,12 @@ table {
 }
 
 table th {
-    height: 50px;
+    height: 35px;
     color:white;
- 
     background-color: #878480;
 }
 table td {
       color:black;
      background-color:#ddd7c8;
-    
     
 }

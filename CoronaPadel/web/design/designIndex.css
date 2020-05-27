@@ -360,7 +360,7 @@ body{
     width: 99%;
     background-image:url("fondo.png");
     background-repeat: no-repeat;
-  background-size: cover;
+    background-size: cover;
 }
 
 /*header formulario registrado*/
@@ -371,8 +371,8 @@ body{
     overflow: hidden;
     background-color: #ddd7c8;
     margin-top: 10px;
-    margin-left: 30px;
-    margin-right: 40px
+     margin-right: 505px;
+    margin-left: 435px;
 }
 
 .botones2  li  {
@@ -382,7 +382,8 @@ body{
     text-align: center;
     text-decoration: none;
     padding: 5px;
-    height: 40px;
+    
+    /*    height: 40px;*/
 }
 
 /* Change the link color to #111 (black) on hover */
@@ -409,7 +410,7 @@ body{
     position: absolute;
     background-color: white;
     opacity: 80%;
-    
+
 }
 header{
     padding-top: 1px;
@@ -419,7 +420,7 @@ header{
     background-color: #ddd7c8;
     width: 99%;
     position:fixed;
-    height: 50px;
+    height: 40px;
 
 
 }

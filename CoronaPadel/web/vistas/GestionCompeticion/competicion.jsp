@@ -12,16 +12,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" href="../trophy.png" type="image/png"/>
         <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
         <title><s:text name="competicion.verTodas"></s:text> - <s:property value="#usuario.nombreCompleto"></s:property></title>
         <s:head/>
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-        <h1><s:text name="competicion.verDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h1>  
+        <h2><s:text name="competicion.verDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2>  
             <!--filtrado-->
         <s:if test ="!listaCompeticion.isEmpty()">
-            <table border="1">
+            <table border="1" style="left: 200px;top: 120px;">
                 <thead>
                     <tr>
                         <th><s:text name="competicion.nombre"></s:text></th>

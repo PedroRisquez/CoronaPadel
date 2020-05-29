@@ -371,8 +371,9 @@ body{
     overflow: hidden;
     background-color: #ddd7c8;
     margin-top: 10px;
-     margin-right: 505px;
-    margin-left: 435px;
+    width: 99%;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .botones2  li  {
@@ -382,7 +383,7 @@ body{
     text-align: center;
     text-decoration: none;
     padding: 5px;
-    
+
     /*    height: 40px;*/
 }
 
@@ -420,7 +421,8 @@ header{
     background-color: #ddd7c8;
     width: 99%;
     position:fixed;
-    height: 40px;
+    height: 60px;
+
 
 
 }
@@ -432,6 +434,6 @@ header{
     color: black;
     width: 99%;
     clear: both;
-    position: absolute;
+    position: fixed;
     bottom: 0;
 }

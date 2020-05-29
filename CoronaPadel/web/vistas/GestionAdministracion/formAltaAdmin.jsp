@@ -18,7 +18,7 @@
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-        <h1><s:text name="administracion.registro"></s:text></h1>
+        <h2><s:text name="administracion.registro"></s:text></h2>
         <s:form action="registroAdministracion">
             <s:actionerror cssClass="error"></s:actionerror>
             <s:label key="administracion.nombre"></s:label><s:textfield name="nombre"></s:textfield>

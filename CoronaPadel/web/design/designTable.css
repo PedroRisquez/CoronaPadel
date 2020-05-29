@@ -10,20 +10,18 @@ and open the template in the editor.
 
 table {
     width: 70%;
-    position:fixed;
+/*    position:fixed;*/
        text-align: center;
      background-color: #878480;
 }
 
 table th {
-    height: 50px;
+    height: 35px;
     color:white;
- 
     background-color: #878480;
 }
 table td {
       color:black;
      background-color:#ddd7c8;
-    
     
 }

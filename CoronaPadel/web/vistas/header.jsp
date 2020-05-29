@@ -7,7 +7,7 @@
     <ul class="botones">
         <s:if test="#usuario!=null">
             <div >
-                <s:a action="irUsuarioAction"><s:if test="#usuario.fotoPerfil==null"><img src="/CoronaPadel/coach.png" alt="" width="40" style="margin-left: 110px;"/></s:if><s:else><img src="../img/<s:property value="#usuario.fotoPerfil"></s:property>"/></s:else></s:a>
+                <s:a action="irUsuarioAction"><s:if test="#usuario.fotoPerfil==null"><img src="/CoronaPadel/coach.png" alt="" width="40" style="margin-left: 110px;"/></s:if><s:else><img src="../img/<s:property value="#usuario.fotoPerfil"></s:property>" width="40"/></s:else></s:a>
                    
                             <li> <s:form action="logoutAction">
                     <s:submit key="logout"></s:submit>

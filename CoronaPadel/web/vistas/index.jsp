@@ -20,47 +20,47 @@
         <s:set name="usuario" value="%{#session.usuario}"></s:set>
         <s:include value="header.jsp"></s:include>  
         <s:if test="#usuario.rol=='Arbitro'">
-              <s:if test="!listaDePartidosArbitro.isEmpty()">
-            <s:action name="gestionPartidoAction"></s:action>
-            <h2><s:text name="partidosDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2> 
+            <s:if test="!listaDePartidosArbitro.isEmpty()">
+                <s:action name="gestionPartidoAction"></s:action>
+                <h2><s:text name="partidosDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2> 
 
-                <table border="1">
-                    <thead>
-                        <tr>
-                                <th><s:text name="partido.fechaInicio"></s:text></th>
-                        <th><s:text name="partido.duracion"></s:text></th>
-                        <th><s:text name="partido.parejaLocal"></s:text></th>
-                        <th><s:text name="partido.puntuacion"></s:text></th>
-                        <th><s:text name="partido.resultado"></s:text></th>
-                        <th><s:text name="partido.puntuacion"></s:text></th>
-                        <th><s:text name="partido.parejaVisitante"></s:text></th>
-                        <th><s:text name="botonActualizar"></s:text></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <s:iterator value="listaDePartidosArbitro">
-                        <tr>
-                            <td><s:date name="fechaInicio" format="dd/MM/yyyy - HH:mm"></s:date></td>
-                            <td><s:property value="duracion"></s:property></td>
-                            <s:iterator value="resultados">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                             <th><s:text name="partido.fechaInicio"></s:text></th>
+                            <th><s:text name="partido.duracion"></s:text></th>
+                            <th><s:text name="partido.parejaLocal"></s:text></th>
+                            <th><s:text name="partido.puntuacion"></s:text></th>
+                            <th><s:text name="partido.resultado"></s:text></th>
+                            <th><s:text name="partido.puntuacion"></s:text></th>
+                            <th><s:text name="partido.parejaVisitante"></s:text></th>
+                            <th><s:text name="botonActualizar"></s:text></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <s:iterator value="listaDePartidosArbitro">
+                            <tr>
+                                <td><s:date name="fechaInicio" format="dd/MM/yyyy - HH:mm"></s:date></td>
+                                <td><s:property value="duracion"></s:property></td>
+                                <s:iterator value="resultados">
 
-                                <td><s:property value="parejaByIdParejaLocal.nombre"></s:property></td>
-                                <td><s:property value="puntuacionLocal"></s:property></td>
-                                    <td>-</td>
-                                    <td><s:property value="puntuacionVisitante"></s:property></td>
-                                <td><s:property value="parejaByIdParejaVisitante.nombre"></s:property></td>
+                                    <td><s:property value="parejaByIdParejaLocal.nombre"></s:property></td>
+                                    <td><s:property value="puntuacionLocal"></s:property></td>
+                                        <td>-</td>
+                                        <td><s:property value="puntuacionVisitante"></s:property></td>
+                                    <td><s:property value="parejaByIdParejaVisitante.nombre"></s:property></td>
 
-                                    <td><s:form action="mostrarModificarPartidoAction">
-                                        <s:hidden name="idResultado" value="%{idResultado}"></s:hidden>
-                                        <s:hidden name="idPartido" value="%{idPartido}"></s:hidden>
-                                        <s:submit key="botonActualizar"></s:submit>
-                                    </s:form></td>
-                                </s:iterator>
-                        </tr>
-                    </s:iterator>
-                </tbody>
-            </table>
-              </s:if>
+                                        <td><s:form action="mostrarModificarPartidoAction">
+                                            <s:hidden name="idResultado" value="%{idResultado}"></s:hidden>
+                                            <s:hidden name="idPartido" value="%{idPartido}"></s:hidden>
+                                            <s:submit key="botonActualizar"></s:submit>
+                                        </s:form></td>
+                                    </s:iterator>
+                            </tr>
+                        </s:iterator>
+                    </tbody>
+                </table>
+            </s:if>
             <s:if test="partido!=null">
                 <s:form action="modificarPartidoAction">
                     <s:textfield label="Duracion" name="duracion" value="%{partido.duracion}"></s:textfield>
@@ -74,7 +74,7 @@
                 </s:form>
             </s:if>
         </s:if>
-            <div id="inscripciones">
+        <div id="inscripciones">
             <s:iterator value="listaDeCompeticionesDisponibles">
                 <s:property value="nombre"></s:property><br/>
                 <s:property value="descripcion"></s:property><br/>

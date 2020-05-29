@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
 
          <link rel="icon" href="../trophy.png" type="image/png"/>

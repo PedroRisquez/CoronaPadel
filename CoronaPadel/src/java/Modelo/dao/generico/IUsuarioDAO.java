@@ -12,5 +12,5 @@ import Modelo.dto.Usuario;
  * @author pedro
  */
 public interface IUsuarioDAO extends DAOGenerico<Usuario, String>{
-    Usuario comprobarLogin(String usuario, String clave);
+    Usuario comprobarLogin(String usuario, String clave) throws Exception;
 }

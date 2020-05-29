@@ -11,8 +11,8 @@
     <head>
         <title><s:text name="inicio"></s:text></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../design/design.css" rel="stylesheet" type="text/css"/>
-        <link rel="icon" href="trophy.png" type="image/png"/>
+        <link href="<s:url value='/design/design.css'></s:url>" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <s:head/>
     </head>
     <body>

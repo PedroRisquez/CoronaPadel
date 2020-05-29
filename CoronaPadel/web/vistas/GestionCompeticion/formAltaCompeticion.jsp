@@ -11,10 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
-            <link rel="icon" href="../trophy.png" type="image/png"/>
+            <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
             <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
             <link href="../design/designForm.css" rel="stylesheet" type="text/css"/>
-
             <title><s:text name="competicion.alta"></s:text></title>
         <s:head/>
     </head>

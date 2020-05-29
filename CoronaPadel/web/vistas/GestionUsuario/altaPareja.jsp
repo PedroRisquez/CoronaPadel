@@ -7,7 +7,7 @@
 
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
         <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
-            <link rel="icon" href="../trophy.png" type="image/png"/>
+            <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
 
             <title><s:text name="nuevaPareja"></s:text></title>
         <s:head/>

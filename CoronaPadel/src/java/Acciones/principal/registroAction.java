@@ -9,6 +9,7 @@ import Modelo.dao.UsuarioDAO;
 import Modelo.dto.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import encrypt.Encrypt;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -233,6 +234,7 @@ public class registroAction extends ActionSupport {
 
     public String execute() throws Exception {
         sesion = (Map) ActionContext.getContext().get("session");
+        Encrypt cifrado = new Encrypt();
         if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
             String filePath = ServletActionContext.getServletContext().getRealPath("/");
             System.out.println("Ruta de la imagen:" + filePath);
@@ -242,7 +244,7 @@ public class registroAction extends ActionSupport {
 
         if (this.getRol().equals("Jugador")) {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;

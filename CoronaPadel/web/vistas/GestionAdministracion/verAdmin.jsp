@@ -58,14 +58,14 @@
                     </tbody>
                 </table>
             </s:else>
-       
+
             <s:if test="%{#session.usuario.rol == 'Administrador' && #session.admin.usuario.dni == #session.usuario.dni}">
                 <s:form action="irRegistrarPista">
                     <s:submit key="pista.botonRegistro"></s:submit>
                 </s:form>
             </s:if>
- </div>
-            <div style="padding-left: 170px;padding-top: 390px;">
+        </div>
+        <div style="padding-left: 170px;padding-top: 30px;">
             <h4  style="background-color:#ddd7c8;margin-right: 800px;
                  text-align: center;"><s:text name="competiciones"></s:text></h4>
             <s:if test="%{#session.listadoCompeticiones.isEmpty()}">
@@ -95,15 +95,15 @@
                     </tbody>
                 </table>
             </s:else>
-              </div>
-            <div style="padding-left: 170px;padding-top: 300px;">   
+        </div>
+        <div style="padding-left: 170px;padding-top: 30px;padding-bottom: 90px;">   
             <h4  style="background-color:#ddd7c8;margin-right: 800px;
                  text-align: center;"><s:text name="clasificacion"></s:text></h4>
             <s:if test="%{#session.listadoClasificaciones.isEmpty()}">
                 <p><s:text name="clasificacion.noExiste"></s:text></p>
             </s:if>
             <s:else>
-                <table border="1">
+                <table border="1" style="margin-bottom: 80px;">
                     <thead>
                         <tr>
                             <th><s:text name="clasificacion.usuario"></s:text></th>

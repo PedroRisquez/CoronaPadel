@@ -10,7 +10,7 @@ and open the template in the editor.
 
 table {
     width: 70%;
-    position:fixed;
+/*    position:fixed;*/
        text-align: center;
      background-color: #878480;
 }

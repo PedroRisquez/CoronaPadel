@@ -2,6 +2,32 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/formAltaCompeticion.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/formAltaPista.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/completarCompeticion.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/src/java/Acciones/principal/loginAction.java</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/finAltaPareja.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/registro.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/verAdministraciones.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/pareja.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/altaPareja.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/seleccionarParejaInscripcion.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/verAdmin.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/formActualizarPista.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/formAltaAdmin.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/footer.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/modificarPareja.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/usuario.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/competicion.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/header.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionUsuario/modificarUsuario.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/arbitroPartido.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/index.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionAdministracion/formActualizarAdmin.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/src/java/Modelo/dao/UsuarioDAO.java</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/login.jsp</file>
+            <file>file:/D:/Universidad/3º%20Carrera/2do%20Cuatrimestre/Integracion%20de%20Tecnologías/TrabajoIT/CoronaPadel/CoronaPadel/web/vistas/GestionCompeticion/modificarCompeticion.jsp</file>
+        </group>
     </open-files>
 </project-private>

@@ -7,6 +7,7 @@ package Modelo.dao;
 
 import Modelo.dao.generico.IUsuarioDAO;
 import Modelo.dto.Usuario;
+import encrypt.Encrypt;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,6 +19,7 @@ import org.hibernate.Transaction;
  */
 public class UsuarioDAO implements IUsuarioDAO{
     Session sesion = null;
+    Encrypt cifrado = new Encrypt();
 
     @Override
     public void create(Usuario entidad) {
@@ -64,13 +66,18 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
 
     @Override
-    public Usuario comprobarLogin(String usuario, String clave) {
+    public Usuario comprobarLogin(String usuario, String clave)throws Exception{
         sesion=HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx=sesion.beginTransaction();
-        Query q=sesion.createQuery("From Usuario where usuario='"+usuario+"' and clave='"+clave+"'");
+        Query q=sesion.createQuery("From Usuario where usuario='"+usuario+"'");
         Usuario u = (Usuario)q.uniqueResult();
         tx.commit();
-        return u;
+        String desencriptada = cifrado.descifra(cifrado.StringToByte(u.getClave()));
+        if(desencriptada.equals(clave)){
+            return u;
+        }else{
+            return null;
+        }
     }
 
     public List<Usuario> leerJugadores() {

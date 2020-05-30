@@ -76,10 +76,10 @@
         </s:if>
         <div id="inscripciones">
             <s:iterator value="listaDeCompeticionesDisponibles">
-                <s:property value="nombre"></s:property><br/>
-                <s:property value="descripcion"></s:property><br/>
-                <s:property value="administracion.nombre"></s:property><br/>
-                <s:form action="inscribirse1Action">
+                <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="nombre"></s:property><br/></div>
+                <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="descripcion"></s:property><br/></div>
+               <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="administracion.nombre"></s:property><br/></div>
+               <s:form action="inscribirse1Action" cssClass="margin-top: 20px;">
                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                     <s:if test="%{#usuario.rol=='Jugador'}">
                         <s:submit key="Inscribirse"></s:submit>

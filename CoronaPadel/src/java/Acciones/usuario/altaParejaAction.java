@@ -86,10 +86,14 @@ public class altaParejaAction extends ActionSupport {
             Usuario pareja = this.usuarioDAO.read(this.getDni());
             Usuario usuario = (Usuario)sesion.get("usuario");
             if(this.parejaDAO.parejasDadoUsuarios(usuario.getDni(), pareja.getDni())!=null){
-                addActionError("Ya existe una pareja con el usuario "+ pareja.getNombreCompleto()+" ("+pareja.getUsuario()+")");
+                addActionError(getText("parejaNO") + pareja.getNombreCompleto()+" ("+pareja.getUsuario()+")");
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
             }
             
+            if(pareja.getDni().equals(usuario.getDni())){
+                addActionError(getText("parejaNO2"));
+                this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
+            }
         }else{
             if(this.getNombre().equals("")){
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());

@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
-        <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
-        <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
+        <link href="<s:url value='/design/designIndex.css'></s:url>" rel="stylesheet" type="text/css"/>
+        <link href="<s:url value='/design/designTable.css'></s:url>" rel="stylesheet" type="text/css"/>
         <title><s:text name="administraciones.verTodas"></s:text></title>
         </head>
         <body>

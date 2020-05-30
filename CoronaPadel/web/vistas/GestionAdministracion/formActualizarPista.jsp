@@ -5,8 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
-            <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
-            <link href="../design/designForm.css" rel="stylesheet" type="text/css"/>
+            <link href="<s:url value='/design/designIndex.css'></s:url>" rel="stylesheet" type="text/css"/>
+            <link href="<s:url value='/design/designForm.css'></s:url>" rel="stylesheet" type="text/css"/>
             <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
 
             <title><s:text name="pista.actualizar"></s:text></title>

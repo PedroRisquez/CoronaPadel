@@ -51,10 +51,12 @@ text-align: center;"><s:text name="parejasDe"></s:text> <s:property value="#usua
             <h4 style="background-color:#ddd7c8;margin-right: 800px;
 text-align: center;"><s:text name="sinParejas"></s:text></h4>
         </s:else>
-        </div>
+        <br/>
         <s:form action="irFormParejaAction">
             <s:submit key="crearPareja"></s:submit>
         </s:form>
+        </div>
+        
         <s:include value="../footer.jsp"></s:include>
     </body>
 </html>

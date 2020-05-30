@@ -17,7 +17,8 @@ import org.hibernate.Transaction;
  *
  * @author pedro
  */
-public class UsuarioDAO implements IUsuarioDAO{
+public class UsuarioDAO implements IUsuarioDAO {
+
     Session sesion = null;
     Encrypt cifrado = new Encrypt();
 
@@ -31,10 +32,10 @@ public class UsuarioDAO implements IUsuarioDAO{
 
     @Override
     public Usuario read(String pk) {
-        sesion=HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx=sesion.beginTransaction();
-        Query q=sesion.createQuery("From Usuario where dni='"+pk+"'");
-        Usuario usuario = (Usuario)q.uniqueResult();
+        sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = sesion.beginTransaction();
+        Query q = sesion.createQuery("From Usuario where dni='" + pk + "'");
+        Usuario usuario = (Usuario) q.uniqueResult();
         tx.commit();
         return usuario;
     }
@@ -66,18 +67,23 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
 
     @Override
-    public Usuario comprobarLogin(String usuario, String clave)throws Exception{
-        sesion=HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx=sesion.beginTransaction();
-        Query q=sesion.createQuery("From Usuario where usuario='"+usuario+"'");
-        Usuario u = (Usuario)q.uniqueResult();
+    public Usuario comprobarLogin(String usuario, String clave) throws Exception {
+        sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = sesion.beginTransaction();
+        Query q = sesion.createQuery("From Usuario where usuario='" + usuario + "'");
+        Usuario u = (Usuario) q.uniqueResult();
         tx.commit();
-        String desencriptada = cifrado.descifra(cifrado.StringToByte(u.getClave()));
-        if(desencriptada.equals(clave)){
-            return u;
+        if (u != null) {
+            String desencriptada = cifrado.descifra(cifrado.StringToByte(u.getClave()));
+            if (desencriptada.equals(clave)) {
+                return u;
+            } else {
+                return null;
+            }
         }else{
-            return null;
+            return u;
         }
+        
     }
 
     public List<Usuario> leerJugadores() {
@@ -92,7 +98,7 @@ public class UsuarioDAO implements IUsuarioDAO{
     public List<Usuario> readUsuarioPorDniOUsuario(String usuarioOdni) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
-        Query q = sesion.createQuery("From Usuario where dni = '"+ usuarioOdni +"' or usuario = '"+ usuarioOdni +"'");
+        Query q = sesion.createQuery("From Usuario where dni = '" + usuarioOdni + "' or usuario = '" + usuarioOdni + "'");
         List<Usuario> listaDeUsuario = (List<Usuario>) q.list();
         tx.commit();
         return listaDeUsuario;
@@ -106,5 +112,5 @@ public class UsuarioDAO implements IUsuarioDAO{
         tx.commit();
         return listaDeUsuario;
     }
-    
+
 }

@@ -263,9 +263,9 @@ public class modificarUsuarioAction extends ActionSupport {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
                 Usuario user;
                 if (userAux.getFotoPerfil() == null) {
-                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
+                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
                 } else {
-                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), userAux.getFotoPerfil());
+                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), userAux.getFotoPerfil());
                 }
 
                 this.usuarioDao.update(user);
@@ -273,7 +273,7 @@ public class modificarUsuarioAction extends ActionSupport {
                 return SUCCESS;
             } else {
                 //borrar la que  hay meter la nueva
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
                 this.usuarioDao.update(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
@@ -282,16 +282,16 @@ public class modificarUsuarioAction extends ActionSupport {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
                 Usuario user = null;
                 if (userAux.getFotoPerfil() == null) {
-                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol());
+                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol());
                 } else {
-                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), userAux.getFotoPerfil());
+                    user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), userAux.getFotoPerfil());
                 }
 
                 this.usuarioDao.update(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
                 this.usuarioDao.update(user);
                 sesion.put("usuario", user);
                 return SUCCESS;

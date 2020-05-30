@@ -85,8 +85,8 @@
                                 <td><s:property value="nombre"></s:property></td>
                                 <td><s:property value="descripcion"></s:property></td>
                                     <td>
-                                    <s:form action="verCompeticion">
-                                        <s:hidden name="id" value="%{idCompeticion}"></s:hidden>
+                                    <s:form action="informacionExtraCompeticionAction">
+                                        <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                                         <s:submit key="botonVer"></s:submit>
                                     </s:form>
                                 </td>

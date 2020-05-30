@@ -144,11 +144,11 @@ text-align: center;"><s:text name="competicion.datos"></s:text></h2>
                             <td><s:property value="competicion.formato"></s:property></td>
                             </tr>
                             <tr>
-                                <td><s:text name="competicion.nparejas"></s:text></td>
+                                <td><s:text name="nparejas"></s:text></td>
                             <td><s:property value="competicion.nparejas"></s:property></td>
                             </tr>
                             <tr>
-                                <td><s:text name="competicion.npartidos"></s:text></td>
+                                <td><s:text name="npartidos"></s:text></td>
                             <td><s:property value="competicion.npartidos"></s:property></td>
                             </tr>
                             <tr>

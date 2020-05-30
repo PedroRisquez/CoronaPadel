@@ -65,7 +65,7 @@
                 <s:hidden name="formulario" value="no"></s:hidden>
                 <s:submit key="modificarPerfil"></s:submit>
             </s:form>
-            <s:if test="#usuario.rol=='Administrador' or #usuario.rol=='Jugador'">
+            <s:if test="#usuario.rol=='Administrador' || #usuario.rol=='Jugador' || #usuario.rol=='Player' || #usuario.rol=='Administrator'">
                 <s:form action="irParejas">
                     <s:submit key="misParejas"></s:submit>
                 </s:form>  

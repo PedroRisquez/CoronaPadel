@@ -97,7 +97,7 @@ public class altaParejaAction extends ActionSupport {
         }else{
             if(this.getNombre().equals("")){
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
-                addFieldError("nombre", "El campo debe de estar relleno");
+                addActionError(getText("competicion.nombre.requerido"));
             }
         }
         

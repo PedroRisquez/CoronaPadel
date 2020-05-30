@@ -46,14 +46,14 @@ public class loginAction extends ActionSupport {
 
     public void validate() {
         if (this.getUsuario().equals("")) {
-            addActionError("Campo usuario requerido");
+            addActionError(getText("usuario.usuario.requerido"));
         } else if (this.getClave().equals("")) {
-            addActionError("Campo clave requerido");
+            addActionError(getText("usuario.clave.requerida"));
         } else {
             try {
                 Usuario user = this.usuarioDAO.comprobarLogin(this.getUsuario(), this.getClave());
                 if (user == null) {
-                    addActionError("No existe ningun usuario con las credenciales introducidas");
+                    addActionError(getText("login.fallo"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(loginAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,9 +66,9 @@ public class loginAction extends ActionSupport {
         if (user != null) {
             this.sesion = (Map) ActionContext.getContext().get("session");
             sesion.put("usuario", user);
-            if(user.getRol().equals("Arbitro")){
+            if(user.getRol().equals("Arbitro") || user.getRol().equals("Referee")){
                 return "arbitro";
-            }else if(user.getRol().equals("Jugador")){
+            }else if(user.getRol().equals("Jugador") || user.getRol().equals("Player")){
                 return "jugador";
             }else{
                 return "jugador";

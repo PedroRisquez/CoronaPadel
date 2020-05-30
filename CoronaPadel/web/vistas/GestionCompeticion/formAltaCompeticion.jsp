@@ -19,7 +19,7 @@
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-            <div class="competiciones" style="margin-top:13%;padding-top: 20px;padding-bottom: 120px;"> 
+            <div class="competiciones" style="padding-top: 20px;padding-bottom: 120px;margin-top: 8%; position:absolute;"> 
                   <h2 style="text-align:center;"><s:text name="competicion.form"></s:text></h2>
             <div class="formulario" style="margin-left:20%;margin-right: 20%;">
             <s:form  action="creaCompeticionAction"  style="padding-left: 10px; border-left-width: 1px; border-left-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-top-width: 1px;border-top-style: solid;border-right-width: 1px;border-right-style: solid;">

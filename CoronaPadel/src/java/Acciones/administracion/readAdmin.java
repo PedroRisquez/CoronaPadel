@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.AdministracionDAO;
@@ -13,21 +8,30 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a recoger los datos de una administración para su posterior
+ * modificación
  */
 public class readAdmin extends ActionSupport {
-    
+
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
-    
+
+    //Objetos auxiliares
     int id;
     Administracion admin;
 
+    //DAO necesarios
     AdministracionDAO adminDAO = new AdministracionDAO();
-    
+
     public readAdmin() {
     }
-    
+
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
@@ -36,6 +40,7 @@ public class readAdmin extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }
@@ -59,5 +64,5 @@ public class readAdmin extends ActionSupport {
     public void setAdmin(Administracion admin) {
         this.admin = admin;
     }
-    
+
 }

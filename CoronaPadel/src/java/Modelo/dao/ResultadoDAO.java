@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IResultadoDAO;
@@ -13,8 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author pedro
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad Resultado
  */
 public class ResultadoDAO implements IResultadoDAO {
 
@@ -64,6 +58,7 @@ public class ResultadoDAO implements IResultadoDAO {
         return listaDeResultado;
     }
 
+    @Override
     public List<Resultado> consultaPareja(Integer idPareja) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -74,6 +69,7 @@ public class ResultadoDAO implements IResultadoDAO {
         return listaDeResultado;
     }
 
+    @Override
     public Resultado consultaPartido(Integer idPartido) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

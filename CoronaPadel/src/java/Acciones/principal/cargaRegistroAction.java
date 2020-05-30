@@ -1,25 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.principal;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a recoger los datos de un nuevo usuario para su creación
  */
 public class cargaRegistroAction extends ActionSupport {
+    
+    //Objetos auxiliares
     private List<String> listaDeSexo = new ArrayList<>();
     private List<String> listaDeRol = new ArrayList<>();
     private List<String> listaDeCategoria = new ArrayList<>();
     private List<String> listaDeLadoDeJuego = new ArrayList<>();
 
+    public cargaRegistroAction() {
+    }
+    
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
+    public String execute() throws Exception {
+        this.getListaDeSexo().add(getText("sexo.hombre"));
+        this.getListaDeSexo().add(getText("sexo.mujer"));
+        this.getListaDeSexo().add(getText("sexo.otro"));
+        
+        this.getListaDeRol().add(getText("rol.admin"));
+        this.getListaDeRol().add(getText("rol.jugador"));
+        this.getListaDeRol().add(getText("rol.arbitro"));
+        
+        this.getListaDeCategoria().add(getText("categoria.benjamin"));
+        this.getListaDeCategoria().add(getText("categoria.alevin"));
+        this.getListaDeCategoria().add(getText("categoria.infantil"));
+        this.getListaDeCategoria().add(getText("categoria.cadete"));
+        this.getListaDeCategoria().add(getText("categoria.juvenil"));
+        this.getListaDeCategoria().add(getText("categoria.senior"));
+        
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
+
+        return SUCCESS;
+    }
+    
+    //Getter & Setter de los atributos
     public List<String> getListaDeSexo() {
         return listaDeSexo;
     }
@@ -51,30 +80,4 @@ public class cargaRegistroAction extends ActionSupport {
     public void setListaDeLadoDeJuego(List<String> listaDeLadoDeJuego) {
         this.listaDeLadoDeJuego = listaDeLadoDeJuego;
     }
-    
-    public cargaRegistroAction() {
-    }
-    
-    public String execute() throws Exception {
-        this.getListaDeSexo().add(getText("sexo.hombre"));
-        this.getListaDeSexo().add(getText("sexo.mujer"));
-        this.getListaDeSexo().add(getText("sexo.otro"));
-        this.getListaDeRol().add(getText("rol.admin"));
-        this.getListaDeRol().add(getText("rol.jugador"));
-        this.getListaDeRol().add(getText("rol.arbitro"));
-        this.getListaDeCategoria().add(getText("categoria.benjamin"));
-        this.getListaDeCategoria().add(getText("categoria.alevin"));
-        this.getListaDeCategoria().add(getText("categoria.infantil"));
-        this.getListaDeCategoria().add(getText("categoria.cadete"));
-        this.getListaDeCategoria().add(getText("categoria.juvenil"));
-        this.getListaDeCategoria().add(getText("categoria.senior"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
-//        ActionContext ac = ActionContext.getContext();
-//        System.out.println("******************"+ac.);
-
-        return SUCCESS;
-    }
-    
 }

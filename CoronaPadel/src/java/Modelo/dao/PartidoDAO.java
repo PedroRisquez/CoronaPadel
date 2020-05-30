@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IPartidoDAO;
 import Modelo.dto.Partido;
-import Modelo.dto.Usuario;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author paula
+ *  Clase dedicada a la implementación de los métodos relacionados con la entidad Partido.
  */
 public class PartidoDAO implements IPartidoDAO {
 
@@ -65,6 +58,7 @@ public class PartidoDAO implements IPartidoDAO {
         return listaDePartido;
     }
 
+    @Override
     public List<Partido> listarPartidosPorCompeticion(int idCompeticion) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -74,6 +68,7 @@ public class PartidoDAO implements IPartidoDAO {
         return listaPartidosPorCompeticion;
     }
     
+    @Override
     public List<Partido> listarPartidosPorArbitro(String dniArbitro) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -83,6 +78,7 @@ public class PartidoDAO implements IPartidoDAO {
         return listaPartidosPorArbitro;
     }
     
+    @Override
     public List<Partido> listarPartidosNoFinalizadosPorArbitro(String dniArbitro){
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

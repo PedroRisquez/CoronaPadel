@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IRankingDAO;
-import Modelo.dto.Competicion;
-import Modelo.dto.Partido;
 import Modelo.dto.Ranking;
 import java.util.List;
 import org.hibernate.Query;
@@ -15,8 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author paula
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad Ranking
  */
 public class RankingDAO implements IRankingDAO {
 
@@ -66,6 +58,7 @@ public class RankingDAO implements IRankingDAO {
         return listaDeRanking;
     }
 
+    @Override
     public List<Ranking> listarRankingPorCompeticion(int idCompeticion) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -75,6 +68,7 @@ public class RankingDAO implements IRankingDAO {
         return listaDeRankingPorCompeticion;
     }
     
+    @Override
     public Ranking rankingDadaPareja (int idPareja, int idCompeticion){
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

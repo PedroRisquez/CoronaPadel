@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.ClasificacionglobalDAO;
@@ -19,30 +14,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a registrar una pista de un administración seleccionada en el
+ * sistema
  */
 public class registroPista extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos auxiliares
     int id;
     String localizacion;
     String tipoDeCubierta;
     String tipoDePista;
     String tipoDeSuelo;
-
     Pista pista;
     Administracion admin;
     List<Pista> listadoPistas;
     List<Clasificacionglobal> listadoClasificaciones;
+
+    //DAO necesarios
     PistaDAO pistaDAO = new PistaDAO();
     ClasificacionglobalDAO clasiDAO = new ClasificacionglobalDAO();
-
 
     public registroPista() {
     }
 
+    /**
+     * validate(): método para validar los campos recogidos en el formulario
+     */
     @Override
     public void validate() {
         String p = "^[A-Za-z ]*$";
@@ -56,6 +56,12 @@ public class registroPista extends ActionSupport {
         }
     }
 
+    /**
+     * execute(): método ejecutador de la creación de pista
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
@@ -69,6 +75,13 @@ public class registroPista extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * updatePista(): método ejecutador de la actualización de una pista
+     * seleccionada
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     public String updatePista() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
         this.admin = (Administracion) getSesion().get("admin");
@@ -105,6 +118,7 @@ public class registroPista extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter
     public Map getSesion() {
         return sesion;
     }
@@ -153,7 +167,7 @@ public class registroPista extends ActionSupport {
         this.tipoDeSuelo = tipoDeSuelo;
     }
 
-    public Pista getPista(){
+    public Pista getPista() {
         return pista;
     }
 

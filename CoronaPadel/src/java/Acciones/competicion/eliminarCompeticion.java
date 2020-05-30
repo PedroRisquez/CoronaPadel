@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.competicion;
 
 import Modelo.dao.CompeticionDAO;
@@ -21,17 +16,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a la eliminación de una competición
  */
 public class eliminarCompeticion extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos necesarios
     int idCompeticion;
     Competicion c;
     List<Competicion> listaCompeticion = new ArrayList<>();
 
+    //DAO necesarios
     CompeticionDAO competicionDAO = new CompeticionDAO();
     PartidoDAO partidoDAO = new PartidoDAO();
     RankingDAO rankingDAO = new RankingDAO();
@@ -40,6 +37,12 @@ public class eliminarCompeticion extends ActionSupport {
     public eliminarCompeticion() {
     }
 
+     /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         c = this.competicionDAO.read(idCompeticion);
@@ -64,6 +67,7 @@ public class eliminarCompeticion extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

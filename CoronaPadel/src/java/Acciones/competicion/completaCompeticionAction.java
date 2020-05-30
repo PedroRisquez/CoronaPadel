@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.competicion;
 
 import Modelo.dao.ClasificacionglobalDAO;
@@ -12,7 +7,6 @@ import Modelo.dao.PartidoDAO;
 import Modelo.dao.RankingDAO;
 import Modelo.dao.ResultadoDAO;
 import Modelo.dao.UsuarioDAO;
-import Modelo.dto.Administracion;
 import Modelo.dto.Clasificacionglobal;
 import Modelo.dto.Competicion;
 import Modelo.dto.Pareja;
@@ -23,22 +17,23 @@ import Modelo.dto.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a visualizar las parejas y árbitros disponibles para la
+ * competición en curso
  */
 public class completaCompeticionAction extends ActionSupport {
 
+    //Sesion
+    private Map sesion;
+
+    //Objetos auxiliares
     private List<Pareja> listaDeParejas = new ArrayList<>();
     private List<Partido> listaDePartidos = new ArrayList<>();
     private String asigna;
@@ -52,7 +47,7 @@ public class completaCompeticionAction extends ActionSupport {
     private List<Date> fechasPartidos = new ArrayList<>();
     private String dni;
 
-    //dao
+    //DAO necesarios
     private ParejaDAO parejaDAO = new ParejaDAO();
     private PartidoDAO partidoDAO = new PartidoDAO();
     private ResultadoDAO resultadoDAO = new ResultadoDAO();
@@ -60,170 +55,14 @@ public class completaCompeticionAction extends ActionSupport {
     private CompeticionDAO competicionDAO = new CompeticionDAO();
     private RankingDAO rankingDAO = new RankingDAO();
     private ClasificacionglobalDAO clasificacionDAO = new ClasificacionglobalDAO();
-    //sesion
-    private Map sesion;
-
-    public List<Pareja> getListaDeParejas() {
-        return listaDeParejas;
-    }
-
-    public void setListaDeParejas(List<Pareja> listaDeParejas) {
-        //VER SOLO PAREJAS DISPONIBLES
-        List<Pareja> listaParejasJugador = new ArrayList<>();
-        for (int i = 0; i < listaDeParejas.size(); i++) {
-            boolean valido = true;
-            Pareja p = listaDeParejas.get(i);
-            //JUGADOR 1
-            Usuario j1 = p.getUsuarioByDni1();
-            listaParejasJugador = this.parejaDAO.parejasDadoUsuario(j1.getDni());
-            for (int j = 0; j < listaParejasJugador.size() && valido; j++) {
-                Pareja pp = listaParejasJugador.get(j);
-                listaResultadosPareja1 = this.resultadoDAO.consultaPareja(pp.getIdPareja());
-                if (!listaResultadosPareja1.isEmpty()) {
-                    for (int k = 0; k < listaResultadosPareja1.size() && valido; k++) {
-                        Partido p2 = listaResultadosPareja1.get(k).getPartido();
-                        Date fechaPartido = new Date(p2.getFechaInicio().getTime());
-                        if (fechasPartidos.contains(fechaPartido)) {
-                            valido = false;
-                        }
-                    }
-                }
-            }
-
-            //JUGADOR 2
-            Usuario j2 = p.getUsuarioByDni2();
-            listaParejasJugador = this.parejaDAO.parejasDadoUsuario(j2.getDni());
-            for (int j = 0; j < listaParejasJugador.size() && valido; j++) {
-                Pareja pp = listaParejasJugador.get(j);
-                listaResultadosPareja2 = this.resultadoDAO.consultaPareja(pp.getIdPareja());
-                if (!listaResultadosPareja2.isEmpty()) {
-                    for (int k = 0; k < listaResultadosPareja2.size() && valido; k++) {
-                        Partido p2 = listaResultadosPareja2.get(k).getPartido();
-                        Date fechaPartido = new Date(p2.getFechaInicio().getTime());
-                        if (fechasPartidos.contains(fechaPartido)) {
-                            valido = false;
-                        }
-                    }
-                }
-            }
-
-            if (valido) {
-                this.listaDeParejas.add(p);
-            }
-        }
-
-    }
-
-    public List<Partido> getListaDePartidos() {
-        return listaDePartidos;
-    }
-
-    public void setListaDePartidos(List<Partido> listaDePartidos) {
-        this.listaDePartidos = listaDePartidos;
-    }
-
-    public String getAsigna() {
-        return asigna;
-    }
-
-    public void setAsigna(String asigna) {
-        this.asigna = asigna;
-    }
-
-    public List<Integer> getIdPareja() {
-        return idPareja;
-    }
-
-    public void setIdPareja(List<Integer> idPareja) {
-        this.idPareja = idPareja;
-    }
-
-    public List<Usuario> getListaDeArbitros() {
-        return listaDeArbitros;
-    }
-
-    public List<Date> getFechasPartidos() {
-        return fechasPartidos;
-    }
-
-    public void setFechasPartidos(List<Date> fechasPartidos) {
-        this.fechasPartidos = fechasPartidos;
-    }
-
-    public void setListaDeArbitros(List<Usuario> listaDeArbitros) {
-        //VER SI LOS ARBITROS ESTAN DISPONIBLES
-        for (int i = 0; i < listaDeArbitros.size(); i++) {
-            List<Partido> partidos = new ArrayList<>();
-            Usuario arb = listaDeArbitros.get(i);
-            partidos = this.partidoDAO.listarPartidosPorArbitro(arb.getDni());
-            if (partidos.isEmpty()) {
-                this.listaDeArbitros.add(arb);
-            } else {
-                boolean v = false;
-                for (int j = 0; j < partidos.size(); j++) {
-                    Date fechaPartido = new Date(partidos.get(j).getFechaInicio().getTime());
-                    if (fechasPartidos.contains(fechaPartido)) {
-                        v = true;
-                    }
-                }
-                if (!v) {
-                    this.listaDeArbitros.add(arb);
-                }
-            }
-        }
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public List<Partido> getListaPartidosPareja1() {
-        return listaPartidosPareja1;
-    }
-
-    public void setListaPartidosPareja1(List<Partido> listaPartidosPareja1) {
-        this.listaPartidosPareja1 = listaPartidosPareja1;
-    }
-
-    public List<Partido> getListaPartidosPareja2() {
-        return listaPartidosPareja2;
-    }
-
-    public void setListaPartidosPareja2(List<Partido> listaPartidosPareja2) {
-        this.listaPartidosPareja2 = listaPartidosPareja2;
-    }
-
-    public List<Resultado> getListaResultadosPareja1() {
-        return listaResultadosPareja1;
-    }
-
-    public void setListaResultadosPareja1(List<Resultado> listaResultadosPareja1) {
-        this.listaResultadosPareja1 = listaResultadosPareja1;
-    }
-
-    public List<Resultado> getListaResultadosPareja2() {
-        return listaResultadosPareja2;
-    }
-
-    public void setListaResultadosPareja2(List<Resultado> listadoResultadoPareja2) {
-        this.listaResultadosPareja2 = listadoResultadoPareja2;
-    }
-
-    public List<Partido> getListaPartidosArbitro() {
-        return listaPartidosArbitro;
-    }
-
-    public void setListaPartidosArbitro(List<Partido> listaPartidosArbitro) {
-        this.listaPartidosArbitro = listaPartidosArbitro;
-    }
 
     public completaCompeticionAction() {
     }
 
+    /**
+     * validate(): método para validar los campos recogidos en el formulario
+     */
+    @Override
     public void validate() {
         this.sesion = (Map) ActionContext.getContext().get("session");
         Competicion competicion = (Competicion) this.sesion.get("competicion");
@@ -246,6 +85,12 @@ public class completaCompeticionAction extends ActionSupport {
         }
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         crearFechasPartidos();
@@ -254,6 +99,13 @@ public class completaCompeticionAction extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * asignarParejas(): método dedicado a asignar las parejas a los partidos de
+     * la competición en curso
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     public String asignaParejas() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
         Competicion competicion = (Competicion) this.sesion.get("competicion");
@@ -313,6 +165,8 @@ public class completaCompeticionAction extends ActionSupport {
                 this.resultadoDAO.create(resultado);
             }
         }
+
+        //AÑADIR PAREJAS AL RANKING DE LA COMPETICIÓN Y AÑADIR A LOS USUARIOS EN LA CLASIFICACIÓN GLOBAL DE LA ADMINISTRACIÓN
         Ranking r;
         Clasificacionglobal c, c2;
         for (int i = 0; i < idPareja.size(); i++) {
@@ -332,10 +186,13 @@ public class completaCompeticionAction extends ActionSupport {
 
         }
 
-        //MOSTRAR CALENDARIO CON LOS PARTIDOS DE LA COMPETICION
         return SUCCESS;
     }
 
+    /**
+     * crearFechasPartidos(): método dedicado a crear las fechas para los
+     * partidos de la competición en curso
+     */
     private void crearFechasPartidos() {
         this.sesion = (Map) ActionContext.getContext().get("session");
         Competicion competicion = (Competicion) this.sesion.get("competicion");
@@ -363,6 +220,175 @@ public class completaCompeticionAction extends ActionSupport {
             }
             this.fechasPartidos.add(i, fAnterior.getTime());
         }
+    }
+
+    /**
+     * setListaDeParejas(): método dedicado a establecer que parejas hay disponibles para participar
+     * en la competición en curso
+     * 
+     * @param listaDeParejas todas las parejas del sistema
+     */
+    public void setListaDeParejas(List<Pareja> listaDeParejas) {
+        List<Pareja> listaParejasJugador = new ArrayList<>();
+        for (int i = 0; i < listaDeParejas.size(); i++) {
+            boolean valido = true;
+            Pareja p = listaDeParejas.get(i);
+            //JUGADOR 1
+            Usuario j1 = p.getUsuarioByDni1();
+            listaParejasJugador = this.parejaDAO.parejasDadoUsuario(j1.getDni());
+            for (int j = 0; j < listaParejasJugador.size() && valido; j++) {
+                Pareja pp = listaParejasJugador.get(j);
+                listaResultadosPareja1 = this.resultadoDAO.consultaPareja(pp.getIdPareja());
+                if (!listaResultadosPareja1.isEmpty()) {
+                    for (int k = 0; k < listaResultadosPareja1.size() && valido; k++) {
+                        Partido p2 = listaResultadosPareja1.get(k).getPartido();
+                        Date fechaPartido = new Date(p2.getFechaInicio().getTime());
+                        if (fechasPartidos.contains(fechaPartido)) {
+                            valido = false;
+                        }
+                    }
+                }
+            }
+
+            //JUGADOR 2
+            Usuario j2 = p.getUsuarioByDni2();
+            listaParejasJugador = this.parejaDAO.parejasDadoUsuario(j2.getDni());
+            for (int j = 0; j < listaParejasJugador.size() && valido; j++) {
+                Pareja pp = listaParejasJugador.get(j);
+                listaResultadosPareja2 = this.resultadoDAO.consultaPareja(pp.getIdPareja());
+                if (!listaResultadosPareja2.isEmpty()) {
+                    for (int k = 0; k < listaResultadosPareja2.size() && valido; k++) {
+                        Partido p2 = listaResultadosPareja2.get(k).getPartido();
+                        Date fechaPartido = new Date(p2.getFechaInicio().getTime());
+                        if (fechasPartidos.contains(fechaPartido)) {
+                            valido = false;
+                        }
+                    }
+                }
+            }
+
+            if (valido) {
+                this.listaDeParejas.add(p);
+            }
+        }
+    }
+
+    /**
+     * setListaDeArbitros(): método dedicado a establecer que árbitros hay disponibles para arbitrar
+     * en la competición en curso
+     * 
+     * @param listaDeArbitros todos los árbitros del sistema
+     */
+    public void setListaDeArbitros(List<Usuario> listaDeArbitros) {
+        //VER SI LOS ARBITROS ESTAN DISPONIBLES
+        for (int i = 0; i < listaDeArbitros.size(); i++) {
+            List<Partido> partidos = new ArrayList<>();
+            Usuario arb = listaDeArbitros.get(i);
+            partidos = this.partidoDAO.listarPartidosPorArbitro(arb.getDni());
+            if (partidos.isEmpty()) {
+                this.listaDeArbitros.add(arb);
+            } else {
+                boolean v = false;
+                for (int j = 0; j < partidos.size(); j++) {
+                    Date fechaPartido = new Date(partidos.get(j).getFechaInicio().getTime());
+                    if (fechasPartidos.contains(fechaPartido)) {
+                        v = true;
+                    }
+                }
+                if (!v) {
+                    this.listaDeArbitros.add(arb);
+                }
+            }
+        }
+    }
+
+    //Getter & Setter de los atributos
+    public List<Pareja> getListaDeParejas() {
+        return listaDeParejas;
+    }
+
+    public List<Partido> getListaDePartidos() {
+        return listaDePartidos;
+    }
+
+    public void setListaDePartidos(List<Partido> listaDePartidos) {
+        this.listaDePartidos = listaDePartidos;
+    }
+
+    public String getAsigna() {
+        return asigna;
+    }
+
+    public void setAsigna(String asigna) {
+        this.asigna = asigna;
+    }
+
+    public List<Integer> getIdPareja() {
+        return idPareja;
+    }
+
+    public void setIdPareja(List<Integer> idPareja) {
+        this.idPareja = idPareja;
+    }
+
+    public List<Usuario> getListaDeArbitros() {
+        return listaDeArbitros;
+    }
+
+    public List<Date> getFechasPartidos() {
+        return fechasPartidos;
+    }
+
+    public void setFechasPartidos(List<Date> fechasPartidos) {
+        this.fechasPartidos = fechasPartidos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public List<Partido> getListaPartidosPareja1() {
+        return listaPartidosPareja1;
+    }
+
+    public void setListaPartidosPareja1(List<Partido> listaPartidosPareja1) {
+        this.listaPartidosPareja1 = listaPartidosPareja1;
+    }
+
+    public List<Partido> getListaPartidosPareja2() {
+        return listaPartidosPareja2;
+    }
+
+    public void setListaPartidosPareja2(List<Partido> listaPartidosPareja2) {
+        this.listaPartidosPareja2 = listaPartidosPareja2;
+    }
+
+    public List<Resultado> getListaResultadosPareja1() {
+        return listaResultadosPareja1;
+    }
+
+    public void setListaResultadosPareja1(List<Resultado> listaResultadosPareja1) {
+        this.listaResultadosPareja1 = listaResultadosPareja1;
+    }
+
+    public List<Resultado> getListaResultadosPareja2() {
+        return listaResultadosPareja2;
+    }
+
+    public void setListaResultadosPareja2(List<Resultado> listadoResultadoPareja2) {
+        this.listaResultadosPareja2 = listadoResultadoPareja2;
+    }
+
+    public List<Partido> getListaPartidosArbitro() {
+        return listaPartidosArbitro;
+    }
+
+    public void setListaPartidosArbitro(List<Partido> listaPartidosArbitro) {
+        this.listaPartidosArbitro = listaPartidosArbitro;
     }
 
 }

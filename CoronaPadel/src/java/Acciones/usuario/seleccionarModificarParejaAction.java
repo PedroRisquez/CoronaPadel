@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.usuario;
 
 import Modelo.dao.ParejaDAO;
@@ -10,15 +5,34 @@ import Modelo.dto.Pareja;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a la selección de la pareja que desea posteriormente
+ * modificar
  */
 public class seleccionarModificarParejaAction extends ActionSupport {
+    
+    //Objetos auxiliares
     private Pareja pareja;
     private int idPareja;
 
-    
+    //DAO necesario
     private ParejaDAO parejaDAO = new ParejaDAO();
+    
+    public seleccionarModificarParejaAction() {
+    }
+    
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
+    public String execute() throws Exception {
+        this.setPareja(this.parejaDAO.read(this.getIdPareja()));
+        return SUCCESS;
+    }
+    
+    //Getter & Setter de los atributos
     public Pareja getPareja() {
         return pareja;
     }
@@ -34,14 +48,4 @@ public class seleccionarModificarParejaAction extends ActionSupport {
     public void setIdPareja(int idPareja) {
         this.idPareja = idPareja;
     }
-    
-    
-    public seleccionarModificarParejaAction() {
-    }
-    
-    public String execute() throws Exception {
-        this.setPareja(this.parejaDAO.read(this.getIdPareja()));
-        return SUCCESS;
-    }
-    
 }

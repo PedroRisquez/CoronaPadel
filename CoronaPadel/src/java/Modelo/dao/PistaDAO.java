@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IPista;
@@ -13,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author Nerea
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad
+ * Pista
  */
 public class PistaDAO implements IPista {
 
@@ -30,10 +25,10 @@ public class PistaDAO implements IPista {
 
     @Override
     public Pista read(Integer pk) {
-        sesion=HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx=sesion.beginTransaction();
-        Query q=sesion.createQuery("From Pista where idPista='"+pk+"'");
-        Pista p = (Pista)q.uniqueResult();
+        sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = sesion.beginTransaction();
+        Query q = sesion.createQuery("From Pista where idPista='" + pk + "'");
+        Pista p = (Pista) q.uniqueResult();
         tx.commit();
         return p;
     }

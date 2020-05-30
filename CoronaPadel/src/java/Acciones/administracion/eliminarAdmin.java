@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.AdministracionDAO;
@@ -12,7 +7,6 @@ import Modelo.dao.PartidoDAO;
 import Modelo.dao.PistaDAO;
 import Modelo.dao.RankingDAO;
 import Modelo.dao.ResultadoDAO;
-import Modelo.dao.UsuarioDAO;
 import Modelo.dto.Administracion;
 import Modelo.dto.Competicion;
 import Modelo.dto.Partido;
@@ -26,17 +20,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a la eliminación de una administración
  */
 public class eliminarAdmin extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos auxiliares
     int id;
     Administracion admin;
     List<Administracion> listadoAdministraciones;
 
+    //DAO necesarios
     AdministracionDAO adminDAO = new AdministracionDAO();
     CompeticionDAO competicionDAO = new CompeticionDAO();
     PartidoDAO partidoDAO = new PartidoDAO();
@@ -48,6 +44,12 @@ public class eliminarAdmin extends ActionSupport {
     public eliminarAdmin() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.admin = this.adminDAO.read(id);
@@ -88,6 +90,7 @@ public class eliminarAdmin extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.principal;
 
 import Modelo.dao.UsuarioDAO;
@@ -18,16 +13,14 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 /**
- *
- * @author pedro
+ * Acción dedicada al registro de un nuevo usuario
  */
 public class registroAction extends ActionSupport {
 
-    //fotoPerfil<
-    private File fotoPerfil;
-    private String fotoPerfilContentType;
-    private String fotoPerfilFileName;//este es el que guardo
-    //fotoPerfil>
+    //Sesión
+    private Map sesion;
+
+    //Objetos auxiliares
     private String nombreCompleto;
     private String dni;
     private String usuario;
@@ -37,15 +30,126 @@ public class registroAction extends ActionSupport {
     private String rol;
     private String categoria;
     private String ladoDeJuego;
-    
+
+    //fotoPerfil<
+    private File fotoPerfil;
+    private String fotoPerfilContentType;
+    private String fotoPerfilFileName;//este es el que se guarda
+    //fotoPerfil>
+
     //Listas del formulario
-     private List<String> listaDeSexo = new ArrayList<>();
+    private List<String> listaDeSexo = new ArrayList<>();
     private List<String> listaDeRol = new ArrayList<>();
     private List<String> listaDeCategoria = new ArrayList<>();
     private List<String> listaDeLadoDeJuego = new ArrayList<>();
-    
-    private Map sesion;
 
+    //DAO necesario
+    private UsuarioDAO usuarioDao = new UsuarioDAO();
+
+    public registroAction() {
+    }
+
+    public void validate() {
+        if (this.getNombreCompleto().equals("")) {
+            addActionError("Debe rellenar el campo Nombre");
+        }
+        if (this.getDni().equals("")) {
+            addActionError("Debe rellenar el campo DNI");
+        } else if (!this.getDni().matches("^[0-9]{8}[A-Z]$")) {
+            addActionError("El DNI debe ser valido");
+        }
+        Usuario user = null;
+        user = this.usuarioDao.read(this.getDni());
+        if (user != null) {
+            addActionError("Ya existe una cuenta con este DNI");
+        }
+        if (this.getUsuario().equals("")) {
+            addActionError("Debe rellenar el campo Usuario");
+        }
+        if (this.getClave().equals("")) {
+            addActionError("Debe rellenar el campo contraseña");
+        }
+        if (this.getEmail().equals("")) {//expresionreg email
+            addActionError("Debe rellenar el campo Email");
+        }
+        if (this.getSexo() == null) {
+            addActionError("Campo sexo invalido");
+        }
+        if (this.getRol() == null) {
+            addActionError("Campo tipo de usuario invalido");
+        } else if (this.getRol().equals("Jugador")) {
+            if (this.getCategoria().equals("") || this.getCategoria() == null) {
+                addActionError("Campo categoria requerido para jugadores");
+            }
+            if (this.getLadoDeJuego() == null || this.getLadoDeJuego().equals("")) {
+                addActionError("Campo lado de juego requerido para jugadores");
+            }
+        }
+        this.getListaDeSexo().add(getText("sexo.hombre"));
+        this.getListaDeSexo().add(getText("sexo.mujer"));
+        this.getListaDeSexo().add(getText("sexo.otro"));
+        
+        this.getListaDeRol().add(getText("rol.admin"));
+        this.getListaDeRol().add(getText("rol.jugador"));
+        this.getListaDeRol().add(getText("rol.arbitro"));
+        
+        this.getListaDeCategoria().add(getText("categoria.benjamin"));
+        this.getListaDeCategoria().add(getText("categoria.alevin"));
+        this.getListaDeCategoria().add(getText("categoria.infantil"));
+        this.getListaDeCategoria().add(getText("categoria.cadete"));
+        this.getListaDeCategoria().add(getText("categoria.juvenil"));
+        this.getListaDeCategoria().add(getText("categoria.senior"));
+        
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
+        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
+    }
+
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
+    public String execute() throws Exception {
+        sesion = (Map) ActionContext.getContext().get("session");
+        Encrypt cifrado = new Encrypt();
+        if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
+            String filePath = ServletActionContext.getServletContext().getRealPath("/");
+            System.out.println("Ruta de la imagen:" + filePath);
+            File archivoACrear = new File(filePath + "img", this.fotoPerfilFileName);
+            FileUtils.copyFile(this.fotoPerfil, archivoACrear);
+        }
+
+        if (this.getRol().equals("Jugador")) {
+            if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
+                this.usuarioDao.create(user);
+                sesion.put("usuario", user);
+                return SUCCESS;
+            } else {
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
+                this.usuarioDao.create(user);
+                sesion.put("usuario", user);
+                return SUCCESS;
+            }
+        } else {
+            if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol());
+                this.usuarioDao.create(user);
+                sesion.put("usuario", user);
+                return SUCCESS;
+            } else {
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
+                this.usuarioDao.create(user);
+                sesion.put("usuario", user);
+                return SUCCESS;
+            }
+        }
+    }
+
+    //Getter & Setter de los atributos
     public List<String> getListaDeSexo() {
         return listaDeSexo;
     }
@@ -77,8 +181,6 @@ public class registroAction extends ActionSupport {
     public void setListaDeLadoDeJuego(List<String> listaDeLadoDeJuego) {
         this.listaDeLadoDeJuego = listaDeLadoDeJuego;
     }
-
-    private UsuarioDAO usuarioDao = new UsuarioDAO();
 
     public File getFotoPerfil() {
         return fotoPerfil;
@@ -175,98 +277,4 @@ public class registroAction extends ActionSupport {
     public void setLadoDeJuego(String ladoDeJuego) {
         this.ladoDeJuego = ladoDeJuego;
     }
-
-    public registroAction() {
-    }
-
-    public void validate() {
-        if (this.getNombreCompleto().equals("")) {
-            addActionError("Debe rellenar el campo Nombre");
-        }
-        if (this.getDni().equals("")) {
-            addActionError("Debe rellenar el campo DNI");
-        } else if (!this.getDni().matches("^[0-9]{8}[A-Z]$")) {
-            addActionError("El DNI debe ser valido");
-        }
-        Usuario user = null;
-        user = this.usuarioDao.read(this.getDni());
-        if (user != null) {
-            addActionError("Ya existe una cuenta con este DNI");
-        }
-        if (this.getUsuario().equals("")) {
-            addActionError("Debe rellenar el campo Usuario");
-        }
-        if (this.getClave().equals("")) {
-            addActionError("Debe rellenar el campo contraseña");
-        }
-        if (this.getEmail().equals("")) {//expresionreg email
-            addActionError("Debe rellenar el campo Email");
-        }
-        if (this.getSexo() == null) {
-            addActionError("Campo sexo invalido");
-        }
-        if (this.getRol() == null) {
-            addActionError("Campo tipo de usuario invalido");
-        } else if (this.getRol().equals("Jugador")) {
-            if (this.getCategoria().equals("") || this.getCategoria() == null) {
-                addActionError("Campo categoria requerido para jugadores");
-            }
-            if (this.getLadoDeJuego() == null || this.getLadoDeJuego().equals("")) {
-                addActionError("Campo lado de juego requerido para jugadores");
-            }
-        }
-        this.getListaDeSexo().add(getText("sexo.hombre"));
-        this.getListaDeSexo().add(getText("sexo.mujer"));
-        this.getListaDeSexo().add(getText("sexo.otro"));
-        this.getListaDeRol().add(getText("rol.admin"));
-        this.getListaDeRol().add(getText("rol.jugador"));
-        this.getListaDeRol().add(getText("rol.arbitro"));
-        this.getListaDeCategoria().add(getText("categoria.benjamin"));
-        this.getListaDeCategoria().add(getText("categoria.alevin"));
-        this.getListaDeCategoria().add(getText("categoria.infantil"));
-        this.getListaDeCategoria().add(getText("categoria.cadete"));
-        this.getListaDeCategoria().add(getText("categoria.juvenil"));
-        this.getListaDeCategoria().add(getText("categoria.senior"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
-        this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
-    }
-
-    public String execute() throws Exception {
-        sesion = (Map) ActionContext.getContext().get("session");
-        Encrypt cifrado = new Encrypt();
-        if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
-            String filePath = ServletActionContext.getServletContext().getRealPath("/");
-            System.out.println("Ruta de la imagen:" + filePath);
-            File archivoACrear = new File(filePath+"img", this.fotoPerfilFileName);
-            FileUtils.copyFile(this.fotoPerfil, archivoACrear);
-        }
-
-        if (this.getRol().equals("Jugador")) {
-            if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
-                this.usuarioDao.create(user);
-                sesion.put("usuario", user);
-                return SUCCESS;
-            } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
-                this.usuarioDao.create(user);
-                sesion.put("usuario", user);
-                return SUCCESS;
-            }
-        } else {
-            if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol());
-                this.usuarioDao.create(user);
-                sesion.put("usuario", user);
-                return SUCCESS;
-            } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
-                this.usuarioDao.create(user);
-                sesion.put("usuario", user);
-                return SUCCESS;
-            }
-        }   
-    }
-
 }

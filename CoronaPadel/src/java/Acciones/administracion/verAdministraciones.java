@@ -1,33 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.AdministracionDAO;
 import Modelo.dto.Administracion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a la visualización parcial de todas las administraciones
+ * recogidas en el sistema
  */
 public class verAdministraciones extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
-    AdministracionDAO adminDAO = new AdministracionDAO();
+    //Objeto auxiliar
     List<Administracion> listadoAdministraciones;
+    
+    //DAO necesario
+    AdministracionDAO adminDAO = new AdministracionDAO();
 
     public verAdministraciones() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
@@ -36,6 +39,7 @@ public class verAdministraciones extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.usuario;
 
 import Modelo.dao.ClasificacionglobalDAO;
@@ -24,32 +19,32 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a asignar a la pareja a la competición
  */
 public class inscribirse2Action extends ActionSupport {
 
+    //Sesion
+    private Map sesion;
+    
+    //Objeto auxiliar
     private int idPareja;
 
-    //session
-    private Map sesion;
-    //dao
+    //DAO necesario
     private ParejaDAO parejaDAO = new ParejaDAO();
     private ResultadoDAO resultadoDAO = new ResultadoDAO();
     private ClasificacionglobalDAO clasificacionDAO = new ClasificacionglobalDAO();
     private RankingDAO rankingDAO = new RankingDAO();
 
-    public int getIdPareja() {
-        return idPareja;
-    }
-
-    public void setIdPareja(int idPareja) {
-        this.idPareja = idPareja;
-    }
-
     public inscribirse2Action() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
         Competicion competicion = (Competicion) this.sesion.get("competicion");
@@ -98,4 +93,12 @@ public class inscribirse2Action extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
+    public int getIdPareja() {
+        return idPareja;
+    }
+
+    public void setIdPareja(int idPareja) {
+        this.idPareja = idPareja;
+    }
 }

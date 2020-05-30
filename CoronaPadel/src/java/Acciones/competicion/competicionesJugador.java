@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.competicion;
 
 import Modelo.dao.CompeticionDAO;
 import Modelo.dao.ParejaDAO;
-import Modelo.dao.PartidoDAO;
 import Modelo.dao.RankingDAO;
 import Modelo.dao.ResultadoDAO;
 import Modelo.dto.Competicion;
@@ -24,21 +18,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada recoger los datos de un usuario "Jugador" para su cuenta
+ * personal
  */
 public class competicionesJugador extends ActionSupport {
 
+    //Sesión
     private Map sesion = (Map) ActionContext.getContext().get("session");
+
+    //Objetos auxiliares
     Competicion competicion;
     private int idCompeticion;
-
     List<Competicion> listaCompeticion = new ArrayList<>();
     List<Pareja> listaParejas = new ArrayList<>();
     List<Resultado> listaResultados = new ArrayList<>();
     List<Partido> listaPartidos = new ArrayList<>();
     List<Ranking> listaRanking = new ArrayList<>();
 
+    //DAO necesarios
     private ParejaDAO parejaDAO = new ParejaDAO();
     private ResultadoDAO resultadoDAO = new ResultadoDAO();
     private CompeticionDAO competicionDAO = new CompeticionDAO();
@@ -47,6 +44,13 @@ public class competicionesJugador extends ActionSupport {
     public competicionesJugador() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
     public String execute() throws Exception {
         sesion = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) sesion.get("usuario");
@@ -69,11 +73,25 @@ public class competicionesJugador extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * verInformacionExtra(): método dedicado a visualizar la información extra
+     * referente a la competición seleccionada
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     public String verInformacionExtra() throws Exception {
         this.setCompeticion(this.competicionDAO.read(this.getIdCompeticion()));
         return this.execute();
     }
 
+    /**
+     * verPartidos(): método dedicado a visualizar los partidos en los que está
+     * involucrado el usuario "Jugador" referente a la competición seleccionada
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     public String verPartidos() throws Exception {
         sesion = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) sesion.get("usuario");
@@ -94,13 +112,21 @@ public class competicionesJugador extends ActionSupport {
         getSesion().put("listaPartidos", listaPartidos);
         return this.execute();
     }
-    
-     public String verRanking() throws Exception{
+
+    /**
+     * verRanking(): método dedicado a visualizar el ranking de la competición
+     * seleccionada
+     * 
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    public String verRanking() throws Exception {
         this.setListaRanking(rankingDAO.listarRankingPorCompeticion(this.getIdCompeticion()));
         getSesion().put("listaRanking", listaRanking);
         return this.execute();
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

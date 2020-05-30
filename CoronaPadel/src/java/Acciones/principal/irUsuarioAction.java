@@ -10,14 +10,22 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a verificar la sesión de un usuario registrado
  */
 public class irUsuarioAction extends ActionSupport {
+    //Sesión
     private Map sesion;
+    
     public irUsuarioAction() {
     }
     
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
         if(this.sesion.get("usuario")!=null){

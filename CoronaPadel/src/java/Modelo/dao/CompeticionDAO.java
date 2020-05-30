@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.ICompeticionDAO;
@@ -13,8 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author paula
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad Competición
  */
 public class CompeticionDAO implements ICompeticionDAO {
 
@@ -75,6 +69,7 @@ public class CompeticionDAO implements ICompeticionDAO {
         return listaDeCompeticion;
     }
   
+    @Override
     public List<Competicion> listarPorAdministrador(String dni) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

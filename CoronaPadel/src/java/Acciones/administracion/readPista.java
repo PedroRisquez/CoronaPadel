@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.PistaDAO;
@@ -15,16 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a recoger los datos de una pista para su posterior
+ * modificación
  */
 public class readPista extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos auxiliares
     int id;
     Pista pista;
-    
+
+    //DAO necesarios
     PistaDAO pistaDAO = new PistaDAO();
     List<String> listadoCubierta;
     List<String> listadoPista;
@@ -33,6 +31,12 @@ public class readPista extends ActionSupport {
     public readPista() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
@@ -42,7 +46,7 @@ public class readPista extends ActionSupport {
         this.listadoCubierta = new ArrayList<>();
         this.listadoPista = new ArrayList<>();
         this.listadoSuelo = new ArrayList<>();
-        
+
         switch (this.pista.getTipoDeCubierta()) {
             case "Exterior":
                 this.listadoCubierta.add(getText("pista.exterior"));
@@ -59,7 +63,7 @@ public class readPista extends ActionSupport {
                 this.listadoCubierta.add(getText("pista.exterior"));
                 this.listadoCubierta.add(getText("pista.semi"));
                 break;
-        } 
+        }
 
         switch (this.pista.getTipoDePista()) {
             case "Muro":
@@ -116,6 +120,7 @@ public class readPista extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

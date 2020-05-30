@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -12,13 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a listar los elementos necesarios para la creación de una
+ * pista
  */
 public class listasPista extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos auxiliares
     List<String> listadoCubierta;
     List<String> listadoPista;
     List<String> listadoSuelo;
@@ -26,26 +23,32 @@ public class listasPista extends ActionSupport {
     public listasPista() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
-        
+
         this.listadoCubierta = new ArrayList<>();
         this.listadoPista = new ArrayList<>();
         this.listadoSuelo = new ArrayList<>();
-        
-        this.listadoCubierta.add("Exterior");
-        this.listadoCubierta.add("Semi-cubierto");
-        this.listadoCubierta.add("Cubierto");
 
-        this.listadoPista.add("Muro");
-        this.listadoPista.add("Cristal");
+        this.listadoCubierta.add(getText("pista.exterior"));
+        this.listadoCubierta.add(getText("pista.semi"));
+        this.listadoCubierta.add(getText("pista.cubierto"));
 
-        this.listadoSuelo.add("Cesped");
-        this.listadoSuelo.add("Hormigon");
-        this.listadoSuelo.add("Madera");
-        this.listadoSuelo.add("Resina");
-        this.listadoSuelo.add("Cemento");
+        this.listadoPista.add(getText("pista.muro"));
+        this.listadoPista.add(getText("pista.cristal"));
+
+        this.listadoSuelo.add(getText("pista.cesped"));
+        this.listadoSuelo.add(getText("pista.hormigon"));
+        this.listadoSuelo.add(getText("pista.madera"));
+        this.listadoSuelo.add(getText("pista.resina"));
+        this.listadoSuelo.add(getText("pista.cemento"));
 
         getSesion().put("listadoCubierta", this.listadoCubierta);
         getSesion().put("listadoPista", this.listadoPista);
@@ -54,6 +57,7 @@ public class listasPista extends ActionSupport {
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }

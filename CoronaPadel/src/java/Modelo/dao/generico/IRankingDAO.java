@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao.generico;
 
 import Modelo.dto.Ranking;
+import java.util.List;
 
 /**
- *
- * @author paula
+ * Interfaz dedicada a los métodos relacionados con la entidad Ranking.
  */
 public interface IRankingDAO extends DAOGenerico<Ranking, Integer>{
     
+    List<Ranking> listarRankingPorCompeticion(int idCompeticion);
+    
+    Ranking rankingDadaPareja (int idPareja, int idCompeticion);
 }

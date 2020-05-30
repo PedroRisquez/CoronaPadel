@@ -13,7 +13,7 @@
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
         <link href="<s:url value='/design/designIndex.css'></s:url>" rel="stylesheet" type="text/css"/>
         <link href="<s:url value='/design/designTable.css'></s:url>" rel="stylesheet" type="text/css"/>
-            <link href="../design/designForm.css" rel="stylesheet" type="text/css"/>
+        <link href="<s:url value='/design/designForm.css'></s:url>" rel="stylesheet" type="text/css"/>
 
             <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <title><s:text name="administracion.registro"></s:text></title>
@@ -21,15 +21,16 @@
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-            <div style="padding-left: 170px;padding-top: 160px;">
-                <h2 style="background-color:#ddd7c8;margin-right: 800px;
-                    text-align: center;"><s:text name="administracion.registro"></s:text></h2>
-            <s:form action="registroAdministracion">
-                <s:actionerror cssClass="error"></s:actionerror>
-                <s:label key="administracion.nombre"></s:label><s:textfield name="nombre"></s:textfield>
-                <p><s:text name="administracion.pistas"></s:text></p>
-                <s:submit key="botonRegistrar"></s:submit>
-            </s:form>
+            <div class="competiciones" style="padding-top: 20px;padding-bottom: 5px;margin-top: 8%; position:absolute; height: 25%;">
+                <h2 style="text-align:center;"><s:text name="administracion.registro"></s:text></h2>
+                <div class="formulario" style="margin-left:20%;margin-right: 20%;">
+                <s:form action="registroAdministracion">
+                    <s:actionerror cssClass="error"></s:actionerror>
+                    <s:label key="administracion.nombre"></s:label><s:textfield name="nombre"></s:textfield> <br/> 
+                    <s:submit key="botonRegistrar"></s:submit><br/><br/>
+                    <s:text name="administracion.pistas"></s:text>
+                </s:form>
+            </div>
         </div>
         <s:include value="../footer.jsp"></s:include> 
     </body>

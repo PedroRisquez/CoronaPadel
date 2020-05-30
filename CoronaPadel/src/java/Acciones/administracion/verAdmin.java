@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.administracion;
 
 import Modelo.dao.AdministracionDAO;
@@ -19,19 +14,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Nerea
+ * Acción dedicada a recoger de una administración para ser visualizada más
+ * detalladamente
  */
 public class verAdmin extends ActionSupport {
 
+    //Sesión
     Map sesion = (Map) ActionContext.getContext().get("session");
 
+    //Objetos auxiliares
     Integer id;
     List<Pista> listadoPistas;
     List<Clasificacionglobal> listadoClasificaciones;
     List<Competicion> listadoCompeticiones;
     Administracion admin;
 
+    //DAO necesarios
     AdministracionDAO adminDAO = new AdministracionDAO();
     PistaDAO pistaDAO = new PistaDAO();
     ClasificacionglobalDAO clasiDAO = new ClasificacionglobalDAO();
@@ -40,6 +38,12 @@ public class verAdmin extends ActionSupport {
     public verAdmin() {
     }
 
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
     @Override
     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
@@ -51,10 +55,11 @@ public class verAdmin extends ActionSupport {
         getSesion().put("listadoCompeticiones", listadoCompeticiones);
         this.listadoClasificaciones = this.clasiDAO.consultarClasificaciones(getAdmin().getIdAdministracion());
         getSesion().put("listadoClasificaciones", listadoClasificaciones);
-        
+
         return SUCCESS;
     }
 
+    //Getter & Setter de los atributos
     public Map getSesion() {
         return sesion;
     }
@@ -102,6 +107,5 @@ public class verAdmin extends ActionSupport {
     public void setListadoCompeticiones(List<Competicion> listadoCompeticiones) {
         this.listadoCompeticiones = listadoCompeticiones;
     }
-
 
 }

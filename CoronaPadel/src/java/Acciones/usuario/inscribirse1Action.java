@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.usuario;
 
 import Modelo.dao.CompeticionDAO;
@@ -24,49 +19,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a visualizar al usuario las parejas que tiene disponible para
+ * poder inscribirse en la competición seleccionada
  */
 public class inscribirse1Action extends ActionSupport {
-    private int idCompeticion;
-    //salida
+
+    //Sesión
     private Map sesion;
+
+    //Objetos auxiliares
+    private int idCompeticion;
     private List<Pareja> listaDePareja = new ArrayList<>();
-    //dao
+
+    //DAO necesarios
     private CompeticionDAO competicionDAO = new CompeticionDAO();
     private ParejaDAO parejaDAO = new ParejaDAO();
     private ResultadoDAO resultadoDAO = new ResultadoDAO();
 
-    public int getIdCompeticion() {
-        return idCompeticion;
-    }
-
-    public void setIdCompeticion(int idCompeticion) {
-        this.idCompeticion = idCompeticion;
-    }
-
-    public List<Pareja> getListaDePareja() {
-        return listaDePareja;
-    }
-
-    public void setListaDePareja(List<Pareja> listaDePareja) {
-        this.listaDePareja = listaDePareja;
-    }
-    
-    
     public inscribirse1Action() {
     }
-    
+
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
     public String execute() throws Exception {
-        this.sesion = (Map)ActionContext.getContext().get("session");
-        Usuario usuario = (Usuario)this.sesion.get("usuario");
+        this.sesion = (Map) ActionContext.getContext().get("session");
+        Usuario usuario = (Usuario) this.sesion.get("usuario");
         List<Pareja> listTodasParejas = this.parejaDAO.parejasDadoUsuario(usuario.getDni());
         Competicion competicion = this.competicionDAO.read(this.getIdCompeticion());
-        Date fechaInicioComp = new Date(competicion.getFechaInicio().getTime());
-        
-        
+
         List<Date> fechasPartidos = new ArrayList<>();
-        
+
         this.sesion = (Map) ActionContext.getContext().get("session");
         //OBTENER FECHAS PREDEFINIDAS PARA LA COMPETICION
         Date fecha = competicion.getFechaInicio();
@@ -92,13 +79,11 @@ public class inscribirse1Action extends ActionSupport {
             }
             fechasPartidos.add(i, fAnterior.getTime());
         }
-        
-        
-        
+
         List<Resultado> listaResultadosPareja1 = new ArrayList<>();
         List<Resultado> listaResultadosPareja2 = new ArrayList<>();
         List<Pareja> listaParejasJugador = new ArrayList<>();
-        
+
         for (int i = 0; i < listTodasParejas.size(); i++) {
             boolean valido = true;
             Pareja p = listTodasParejas.get(i);
@@ -140,15 +125,27 @@ public class inscribirse1Action extends ActionSupport {
                 this.listaDePareja.add(p);
             }
         }
-        
-        
-        
-        
-        
-        
+
         this.sesion.put("competicion", competicion);
         return SUCCESS;
-        
+
     }
-    
+
+    //Getter & Setter de los atributos
+    public int getIdCompeticion() {
+        return idCompeticion;
+    }
+
+    public void setIdCompeticion(int idCompeticion) {
+        this.idCompeticion = idCompeticion;
+    }
+
+    public List<Pareja> getListaDePareja() {
+        return listaDePareja;
+    }
+
+    public void setListaDePareja(List<Pareja> listaDePareja) {
+        this.listaDePareja = listaDePareja;
+    }
+
 }

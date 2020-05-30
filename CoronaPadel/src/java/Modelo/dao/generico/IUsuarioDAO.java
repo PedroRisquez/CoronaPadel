@@ -1,16 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao.generico;
 
 import Modelo.dto.Usuario;
+import java.util.List;
 
 /**
- *
- * @author pedro
+ * Interfaz dedicada a los métodos relacionados con la entidad Usuario
  */
-public interface IUsuarioDAO extends DAOGenerico<Usuario, String>{
+public interface IUsuarioDAO extends DAOGenerico<Usuario, String> {
+
     Usuario comprobarLogin(String usuario, String clave) throws Exception;
+
+    List<Usuario> leerJugadores();
+
+    List<Usuario> readUsuarioPorDniOUsuario(String usuarioOdni);
+
+    List<Usuario> listarArbitros();
 }

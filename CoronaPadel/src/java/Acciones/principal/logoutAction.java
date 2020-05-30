@@ -11,16 +11,23 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a cerrar sesión en la aplicación
  */
 public class logoutAction extends ActionSupport {
 
+    //Sesión
     private Map sesion;
 
     public logoutAction() {
     }
 
+     /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
     public String execute() throws Exception {
         sesion = (Map) ActionContext.getContext().get("session");
         sesion.remove("usuario");

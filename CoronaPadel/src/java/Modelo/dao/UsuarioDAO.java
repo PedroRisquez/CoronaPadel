@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IUsuarioDAO;
@@ -14,8 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author pedro
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad Usuario.
  */
 public class UsuarioDAO implements IUsuarioDAO {
 
@@ -86,6 +80,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         
     }
 
+    @Override
     public List<Usuario> leerJugadores() {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -95,6 +90,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return listaDeJugador;
     }
 
+    @Override
     public List<Usuario> readUsuarioPorDniOUsuario(String usuarioOdni) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -104,6 +100,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return listaDeUsuario;
     }
 
+    @Override
     public List<Usuario> listarArbitros() {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

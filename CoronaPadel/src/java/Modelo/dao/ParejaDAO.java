@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.dao;
 
 import Modelo.dao.generico.IParejaDAO;
@@ -13,8 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author pedro
+ * Clase dedicada a la implementación de los métodos relacionados con la entidad Pareja
  */
 public class ParejaDAO implements IParejaDAO{
     Session sesion = null;
@@ -63,6 +57,7 @@ public class ParejaDAO implements IParejaDAO{
         return listaDePareja;
     }
 
+    @Override
     public List<Pareja> parejasDadoUsuario(String dni) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
@@ -72,6 +67,7 @@ public class ParejaDAO implements IParejaDAO{
         return listaDeParejaDadoUsuario;
     }
     
+    @Override
     public Pareja parejasDadoUsuarios(String dni1,String dni2) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

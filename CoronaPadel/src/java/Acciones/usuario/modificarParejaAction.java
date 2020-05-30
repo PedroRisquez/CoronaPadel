@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Acciones.usuario;
 
 import Modelo.dao.ParejaDAO;
@@ -15,19 +10,54 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author pedro
+ * Acción dedicada a modificar una pareja seleccionada
  */
 public class modificarParejaAction extends ActionSupport {
+    
+    //Sesion
+    private Map sesion;
+    
+    //Objetos auxiliares
     private int idPareja;
     private String nombre;
     private List<Pareja> listaDeParejas = new ArrayList<>();
-    private Map sesion;
     private Pareja pareja;
 
-    
-    //dao
+    //DAO necesario
     private ParejaDAO parejaDAO = new ParejaDAO();
+    
+    public modificarParejaAction() {
+    }
+    
+    /**
+     * validate(): método para validar los campos recogidos en el formulario
+     */
+    @Override
+    public void validate(){
+        if(this.getNombre().equals("")){
+            addActionError(getText("competicion.nombre.requerido"));
+            this.setPareja(this.parejaDAO.read(this.getIdPareja()));
+        }
+    }
+    
+    /**
+     * execute(): método ejecutador de la acción requerida
+     *
+     * @return Exito de la operación
+     * @throws java.lang.Exception
+     */
+    @Override
+    public String execute() throws Exception {
+        pareja = this.parejaDAO.read(this.getIdPareja());
+        pareja.setNombre(this.getNombre());
+        this.parejaDAO.update(pareja);
+        this.sesion = (Map)ActionContext.getContext().get("session");
+        Usuario usuario = (Usuario)this.sesion.get("usuario");
+        this.setListaDeParejas(this.parejaDAO.parejasDadoUsuario(usuario.getDni()));
+        return SUCCESS;
+    }
+    
+    //Getter & Setter de los atributos
     public int getIdPareja() {
         return idPareja;
     }
@@ -58,28 +88,6 @@ public class modificarParejaAction extends ActionSupport {
 
     public void setPareja(Pareja pareja) {
         this.pareja = pareja;
-    }
-    
-    
-    
-    public modificarParejaAction() {
-    }
-    
-    public void validate(){
-        if(this.getNombre().equals("")){
-            addActionError(getText("competicion.nombre.requerido"));
-            this.setPareja(this.parejaDAO.read(this.getIdPareja()));
-        }
-    }
-    
-    public String execute() throws Exception {
-        Pareja pareja = this.parejaDAO.read(this.getIdPareja());
-        pareja.setNombre(this.getNombre());
-        this.parejaDAO.update(pareja);
-        this.sesion = (Map)ActionContext.getContext().get("session");
-        Usuario usuario = (Usuario)this.sesion.get("usuario");
-        this.setListaDeParejas(this.parejaDAO.parejasDadoUsuario(usuario.getDni()));
-        return SUCCESS;
     }
     
 }

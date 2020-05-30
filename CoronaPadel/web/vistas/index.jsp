@@ -20,9 +20,11 @@
         <s:set name="usuario" value="%{#session.usuario}"></s:set>
         <s:include value="header.jsp"></s:include>  
         <s:if test="#usuario.rol=='Arbitro'">
+            <div style="padding-left: 170px;padding-top: 10%;margin-bottom: 20%;">
             <s:if test="!listaDePartidosArbitro.isEmpty()">
                 <s:action name="gestionPartidoAction"></s:action>
-                <h2><s:text name="partidosDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2> 
+                <h2 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2> 
 
                     <table border="1">
                         <thead>
@@ -73,6 +75,7 @@
                     <s:submit key="partido.finalizar"></s:submit>
                 </s:form>
             </s:if>
+                </div>
         </s:if>
         <div id="inscripciones">
             <s:iterator value="listaDeCompeticionesDisponibles">

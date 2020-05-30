@@ -70,8 +70,9 @@ public class loginAction extends ActionSupport {
                 return "arbitro";
             }else if(user.getRol().equals("Jugador")){
                 return "jugador";
+            }else{
+                return "jugador";
             }
-            return SUCCESS;
         } else {
             return ERROR;
         }

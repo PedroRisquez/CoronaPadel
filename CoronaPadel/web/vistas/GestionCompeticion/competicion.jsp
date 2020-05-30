@@ -184,7 +184,8 @@ text-align: center;"><s:text name="competicion.datos"></s:text></h2>
                   </div>
         </s:if>
         <s:else>
-            <p><s:text name="noCompeticiones"></s:text></p>  
+            <h4 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="noCompeticiones"></s:text></h4>  
         </s:else>
         </div>
         <s:include value="../footer.jsp"></s:include>

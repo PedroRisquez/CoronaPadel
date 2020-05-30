@@ -249,19 +249,19 @@ public class registroAction extends ActionSupport {
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             }
         } else {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), this.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;

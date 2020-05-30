@@ -10,10 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+        <script src="jquery-1.12.4.min.js" type="text/javascript"></script>
         <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <link href="<s:url value='/design/design.css'></s:url>" rel="stylesheet" type="text/css"/>
-        <!--<link href="../design/design.css" rel="stylesheet" type="text/css"/>-->
         <title><s:text name="registro.usuario"></s:text></title>
         <script>
             $(document).ready(function () {

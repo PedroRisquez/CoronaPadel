@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" href="../trophy.png" type="image/png"/>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
         <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
@@ -19,7 +19,9 @@
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-        <h2><s:text name="competicion.verDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2>  
+          <div style="padding-left: 170px;padding-top: 160px;">
+        <h2 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="competicion.verDe"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2>  
             <!--filtrado-->
         <s:if test ="!listaCompeticion.isEmpty()">
             <table border="1" style="left: 200px;top: 120px;">
@@ -124,7 +126,9 @@
                 </table>
             </s:if>  
             <s:if test="competicion!=null">
-                <h2><s:text name="competicion.datos"></s:text></h2>
+                  <div style="padding-left: 170px;padding-top: 30px;margin-bottom: 20%;">
+                <h2 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="competicion.datos"></s:text></h2>
                     <table border="1">
                         <tbody>
                             <tr>
@@ -177,11 +181,13 @@
                         </tbody>
                     </table>
             </s:if>
+                  </div>
         </s:if>
         <s:else>
-            <p><s:text name="noCompeticiones"></s:text></p>  
+            <h4 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="noCompeticiones"></s:text></h4>  
         </s:else>
-
+        </div>
         <s:include value="../footer.jsp"></s:include>
     </body>
 </html>

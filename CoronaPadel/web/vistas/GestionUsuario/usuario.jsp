@@ -10,26 +10,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" href="../trophy.png" type="image/png"/>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
+        
+        
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
         <title><s:text name="miPerfil"></s:text> - <s:property value="#usuario.nombreCompleto"></s:property></title>
         <s:head/>
     </head>
     <body>
         <s:include value="../header.jsp"></s:include>
-        <h1><s:text name="miPerfil"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h1>
+        <div style="padding-left: 170px;padding-top: 160px;">
+        <h2 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="miPerfil"></s:text> <s:property value="#usuario.nombreCompleto"></s:property></h2>
         <s:if test="#usuario.fotoPerfil!=null">
             <img src="../img/<s:property value="#usuario.fotoPerfil"></s:property>" height="100"/>
         </s:if>
         <s:else>
             <h4><s:text name="sinFoto"></s:text></h4>
         </s:else>
-        <h2><s:text name="datos"></s:text></h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th><s:text name="vista.usuario.dni"></s:text></th>
+        <h2 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="datos"></h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th><s:text name="vista.usuario.dni"></s:text></th>
                     <th><s:text name="vista.usuario.nombre"></s:text></th>
                     <th><s:text name="vista.usuario.usuario"></s:text></th>
                     <th><s:text name="vista.usuario.email"></s:text></th>
@@ -69,6 +75,7 @@
                 <s:submit key="misCompeticiones"></s:submit>
             </s:form>
         </s:if>
+        </div>
         <s:include value="../footer.jsp"></s:include>
     </body>
 </html>

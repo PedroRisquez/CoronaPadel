@@ -5,6 +5,7 @@
  */
 package Acciones.principal;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,9 @@ public class cargaRegistroAction extends ActionSupport {
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
+//        ActionContext ac = ActionContext.getContext();
+//        System.out.println("******************"+ac.);
+
         return SUCCESS;
     }
     

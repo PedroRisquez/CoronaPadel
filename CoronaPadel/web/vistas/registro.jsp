@@ -10,9 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="icon" href="vistas/trophy.png" type="image/png"/>
-        <link href="../design/design.css" rel="stylesheet" type="text/css"/>
+        <script src="jquery-1.12.4.min.js" type="text/javascript"></script>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
+        <link href="<s:url value='/design/design.css'></s:url>" rel="stylesheet" type="text/css"/>
         <title><s:text name="registro.usuario"></s:text></title>
         <script>
             $(document).ready(function () {
@@ -98,7 +98,7 @@
                     <s:radio cssClass="radio" label="Tipo de usuario: " id="rol" name="rol" list="listaDeRol"></s:radio><br/>
                     </div>
                     <div class="form-groupReg"> 
-                    <s:label  cssStyle="font-size:12px;" for="categoria" key="usuario.sexo"></s:label>
+                    <s:label  cssStyle="font-size:12px;" for="categoria" key="usuario.categoria"></s:label>
                     <s:select cssStyle="font-size:12px;" cssClass="radio" label="Categoria: " id="categoria" name="categoria" list="listaDeCategoria"></s:select><br/>
                     </div>
                     <div class="form-groupReg"> 

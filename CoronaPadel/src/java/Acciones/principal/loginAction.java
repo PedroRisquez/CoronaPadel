@@ -10,6 +10,8 @@ import Modelo.dto.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,9 +50,13 @@ public class loginAction extends ActionSupport {
         } else if (this.getClave().equals("")) {
             addActionError("Campo clave requerido");
         } else {
-            Usuario user = this.usuarioDAO.comprobarLogin(this.getUsuario(), this.getClave());
-            if (user == null) {
-                addActionError("No existe ningun usuario con las credenciales introducidas");
+            try {
+                Usuario user = this.usuarioDAO.comprobarLogin(this.getUsuario(), this.getClave());
+                if (user == null) {
+                    addActionError("No existe ningun usuario con las credenciales introducidas");
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(loginAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -64,8 +70,9 @@ public class loginAction extends ActionSupport {
                 return "arbitro";
             }else if(user.getRol().equals("Jugador")){
                 return "jugador";
+            }else{
+                return "jugador";
             }
-            return SUCCESS;
         } else {
             return ERROR;
         }

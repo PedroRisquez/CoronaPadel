@@ -5,12 +5,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <s:set var="usuario" value="%{#session.usuario}"></s:set>
-        <link rel="icon" href="../trophy.png" type="image/png"/>
+        <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <link href="../design/designIndex.css" rel="stylesheet" type="text/css"/>
+        <link href="../design/designTable.css" rel="stylesheet" type="text/css"/>
         <title><s:text name="seleccionarPareja"></s:text></title>
     </head>
     <body>
-        <h1><s:text name="seleccionarPareja2"></s:text></h1>
+        <s:include value="../header.jsp"></s:include>
+        <div style="padding-left: 170px;padding-top: 160px;">
+        <h1 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="seleccionarPareja2"></s:text></h1>
         <s:if test="!listaDePareja.isEmpty()">
             <table border="1">
                 <thead>
@@ -38,8 +42,10 @@
             </table>
         </s:if>
         <s:else>
-            <h4><s:text name="errorAsginar"></s:text></h4>
+            <h4 style="background-color:#ddd7c8;margin-right: 800px;
+text-align: center;"><s:text name="errorAsginar"></s:text></h4>
         </s:else>
+        </div>
         <s:include value="../footer.jsp"></s:include>    
     </body>
 </html>

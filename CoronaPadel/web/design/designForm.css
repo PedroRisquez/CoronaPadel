@@ -8,19 +8,52 @@ and open the template in the editor.
     Author     : paula
 */
 
-.altas{
-    background-color: #809655;
-    padding: .375rem .75rem;
+
+.competiciones{
     position: absolute;
+    background-color: white;
+    /*    opacity: 80%;*/
+    margin:15%;
+    font-family: Montserrat,sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: black;
-    background-clip: padding-box;
-    
+    color: #212529;
+    background-color: #fff;
+    padding:5%;
+    margin-top: 10%;
+    /*    margin-bottom: 20%;*/
+    text-align: center;
+    position:fixed;
+    height: 35%;
+    width: 60%;
 }
-/*h2{
-    background-color:rgba(255, 255, 255, 0.25) ;
-    
-}*/
 
+@media (min-width:768px) {
+    .competiciones {
+        padding: 40px;
+    }
+}
+
+.competiciones {
+    box-shadow: 0 2px 10px rgba(0,0,0,.075);
+    background-color: #fff;
+}
+
+.formulario{
+    background-color: #ddd7c8;
+    text-align:left;
+    opacity: 100%;
+
+}
+
+/*error*/
+.error{
+    color: #a91d20;
+}
+
+h2{
+    background-color:#ddd7c8;
+/*    margin-right: 800px;
+    text-align: center;*/
+}

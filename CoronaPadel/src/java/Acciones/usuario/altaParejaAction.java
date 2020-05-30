@@ -36,27 +36,27 @@ public class altaParejaAction extends ActionSupport {
      * validate(): método para validar los campos recogidos en el formulario
      */
     @Override
-    public void validate() {
-        if (this.getFormulario() != null && this.getFormulario().equals("no")) {
-            sesion = (Map) ActionContext.getContext().get("session");
+    public void validate(){
+        if(this.getFormulario()!=null && this.getFormulario().equals("no")){
+            sesion = (Map)ActionContext.getContext().get("session");
             Usuario pareja = this.usuarioDAO.read(this.getDni());
-            Usuario usuario = (Usuario) sesion.get("usuario");
-            if (this.parejaDAO.parejasDadoUsuarios(usuario.getDni(), pareja.getDni()) != null) {
-                addActionError(getText("parejaNO") + pareja.getNombreCompleto() + " (" + pareja.getUsuario() + ")");
+            Usuario usuario = (Usuario)sesion.get("usuario");
+            if(this.parejaDAO.parejasDadoUsuarios(usuario.getDni(), pareja.getDni())!=null){
+                addActionError(getText("parejaNO") + pareja.getNombreCompleto()+" ("+pareja.getUsuario()+")");
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
             }
-
-            if (pareja.getDni().equals(usuario.getDni())) {
+            
+            if(pareja.getDni().equals(usuario.getDni())){
                 addActionError(getText("parejaNO2"));
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
             }
-        } else {
-            if (this.getNombre().equals("")) {
+        }else{
+            if(this.getNombre().equals("")){
                 this.setListaDeUsuario(this.usuarioDAO.leerJugadores());
-                addFieldError("nombre", "El campo debe de estar relleno");
+                addActionError(getText("competicion.nombre.requerido"));
             }
         }
-
+        
     }
 
     /**
@@ -131,4 +131,5 @@ public class altaParejaAction extends ActionSupport {
     public void setListaDeParejas(List<Pareja> listaDeParejas) {
         this.listaDeParejas = listaDeParejas;
     }
+
 }

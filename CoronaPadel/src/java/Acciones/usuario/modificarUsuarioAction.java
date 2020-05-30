@@ -58,50 +58,46 @@ public class modificarUsuarioAction extends ActionSupport {
     public void validate() {
         if (this.getFormulario().equals("si")) {
             if (this.getNombreCompleto().equals("")) {
-                addActionError("El campo nombre debe estar relleno");
+                addActionError(getText("competicion.nombre.requerido"));
             }
             if (this.getUsuario().equals("")) {
-                addActionError("El campo usuario debe estar relleno");
+                addActionError(getText("usuario.usuario.requerido"));
             }
             if (this.getClave().equals("")) {
-                addActionError("El campo contraseña debe estar relleno");
+                addActionError(getText("usuario.clave.requerida"));
             }
             if (this.getClaveConfirmar().equals("")) {
-                addActionError("El campo confirmar clave debe estar relleno");
+                addActionError(getText("clave.confirmar"));
             }
             if (!this.getClaveConfirmar().equals(this.getClave())) {
-                addActionError("Las claves deben ser iguales");
+                addActionError(getText("Las claves deben ser iguales"));
             }
             if (this.getEmail().equals("")) {//expresionreg email
-                addActionError("Debe rellenar el campo email");
+                addActionError(getText("usuario.email.requerido"));
             }
             if (this.getSexo() == null) {
-                addActionError("Campo sexo invalido");
+                addActionError(getText("usuario.sexo.required"));
             }
-            if (this.getRol().equals("Jugador")) {
+            if (this.getRol().equals("Jugador") || this.getRol().equals("Player")) {
                 if (this.getCategoria().equals("") || this.getCategoria() == null) {
-                    addActionError("Campo categoria requerido para jugadores");
+                    addActionError(getText("jugador.categoria.requerido"));
                 }
                 if (this.getLadoDeJuego() == null || this.getLadoDeJuego().equals("")) {
-                    addActionError("Campo lado de juego requerido para jugadores");
+                    addActionError(getText("jugador.ladoJuego.requerido"));
                 }
             }
-            
             this.getListaDeSexo().add(getText("sexo.hombre"));
             this.getListaDeSexo().add(getText("sexo.mujer"));
             this.getListaDeSexo().add(getText("sexo.otro"));
-            
             this.getListaDeRol().add(getText("rol.admin"));
             this.getListaDeRol().add(getText("rol.jugador"));
             this.getListaDeRol().add(getText("rol.arbitro"));
-            
             this.getListaDeCategoria().add(getText("categoria.benjamin"));
             this.getListaDeCategoria().add(getText("categoria.alevin"));
             this.getListaDeCategoria().add(getText("categoria.infantil"));
             this.getListaDeCategoria().add(getText("categoria.cadete"));
             this.getListaDeCategoria().add(getText("categoria.juvenil"));
             this.getListaDeCategoria().add(getText("categoria.senior"));
-            
             this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
             this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
             this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
@@ -115,8 +111,7 @@ public class modificarUsuarioAction extends ActionSupport {
      * @return Exito de la operación
      * @throws java.lang.Exception
      */
-    @Override
-    public String execute() throws Exception {
+     public String execute() throws Exception {
         this.sesion = (Map) ActionContext.getContext().get("session");
         Usuario userAux = (Usuario) this.sesion.get("usuario");
         if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
@@ -126,7 +121,7 @@ public class modificarUsuarioAction extends ActionSupport {
             FileUtils.copyFile(this.fotoPerfil, archivoACrear);
         }
 
-        if (this.getRol().equals("Jugador")) {
+        if (this.getRol().equals("Jugador") || this.getRol().equals("Player")) {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
                 Usuario user;
                 if (userAux.getFotoPerfil() == null) {
@@ -139,6 +134,7 @@ public class modificarUsuarioAction extends ActionSupport {
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
+                //borrar la que  hay meter la nueva
                 Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), userAux.getClave(), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
                 this.usuarioDao.update(user);
                 sesion.put("usuario", user);
@@ -339,4 +335,5 @@ public class modificarUsuarioAction extends ActionSupport {
     public void setClaveConfirmar(String claveConfirmar) {
         this.claveConfirmar = claveConfirmar;
     }
+
 }

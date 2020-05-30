@@ -35,7 +35,7 @@ public class modificarParejaAction extends ActionSupport {
     @Override
     public void validate(){
         if(this.getNombre().equals("")){
-            addActionError("El nombre es un campo requerido");
+            addActionError(getText("competicion.nombre.requerido"));
             this.setPareja(this.parejaDAO.read(this.getIdPareja()));
         }
     }

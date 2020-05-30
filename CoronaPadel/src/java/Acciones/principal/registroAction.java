@@ -49,57 +49,57 @@ public class registroAction extends ActionSupport {
     public registroAction() {
     }
 
+  /**
+  * validate(): método para validar los campos recogidos en el formulario
+  */
     public void validate() {
         if (this.getNombreCompleto().equals("")) {
-            addActionError("Debe rellenar el campo Nombre");
+            addActionError(getText("competicion.nombre.requerido"));
         }
         if (this.getDni().equals("")) {
-            addActionError("Debe rellenar el campo DNI");
+            addActionError(getText("usuario.dni.requerido"));
         } else if (!this.getDni().matches("^[0-9]{8}[A-Z]$")) {
-            addActionError("El DNI debe ser valido");
+            addActionError(getText("usuario.dni.formato"));
         }
         Usuario user = null;
         user = this.usuarioDao.read(this.getDni());
         if (user != null) {
-            addActionError("Ya existe una cuenta con este DNI");
+            addActionError(getText("usuario.yaexiste"));
         }
         if (this.getUsuario().equals("")) {
-            addActionError("Debe rellenar el campo Usuario");
+            addActionError(getText("usuario.usuario.requerido"));
         }
         if (this.getClave().equals("")) {
-            addActionError("Debe rellenar el campo contraseña");
+            addActionError(getText("usuario.clave.requerida"));
         }
         if (this.getEmail().equals("")) {//expresionreg email
-            addActionError("Debe rellenar el campo Email");
+            addActionError(getText("usuario.email.requerido"));
         }
         if (this.getSexo() == null) {
-            addActionError("Campo sexo invalido");
+            addActionError(getText("usuario.sexo.required"));
         }
         if (this.getRol() == null) {
-            addActionError("Campo tipo de usuario invalido");
-        } else if (this.getRol().equals("Jugador")) {
+            addActionError(getText("usuario.rol.requerido"));
+        } else if (this.getRol().equals("Jugador") || this.getRol().equals("Player")) {
             if (this.getCategoria().equals("") || this.getCategoria() == null) {
-                addActionError("Campo categoria requerido para jugadores");
+                addActionError(getText("jugador.categoria.requerido"));
             }
             if (this.getLadoDeJuego() == null || this.getLadoDeJuego().equals("")) {
-                addActionError("Campo lado de juego requerido para jugadores");
+                addActionError(getText("jugador.ladoJuego.requerido"));
             }
         }
         this.getListaDeSexo().add(getText("sexo.hombre"));
         this.getListaDeSexo().add(getText("sexo.mujer"));
         this.getListaDeSexo().add(getText("sexo.otro"));
-        
         this.getListaDeRol().add(getText("rol.admin"));
         this.getListaDeRol().add(getText("rol.jugador"));
         this.getListaDeRol().add(getText("rol.arbitro"));
-        
         this.getListaDeCategoria().add(getText("categoria.benjamin"));
         this.getListaDeCategoria().add(getText("categoria.alevin"));
         this.getListaDeCategoria().add(getText("categoria.infantil"));
         this.getListaDeCategoria().add(getText("categoria.cadete"));
         this.getListaDeCategoria().add(getText("categoria.juvenil"));
         this.getListaDeCategoria().add(getText("categoria.senior"));
-        
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.reves"));
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.derecha"));
         this.getListaDeLadoDeJuego().add(getText("ladoDeJuego.ambos"));
@@ -118,11 +118,11 @@ public class registroAction extends ActionSupport {
         if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
             String filePath = ServletActionContext.getServletContext().getRealPath("/");
             System.out.println("Ruta de la imagen:" + filePath);
-            File archivoACrear = new File(filePath + "img", this.fotoPerfilFileName);
+            File archivoACrear = new File(filePath+"img", this.fotoPerfilFileName);
             FileUtils.copyFile(this.fotoPerfil, archivoACrear);
         }
 
-        if (this.getRol().equals("Jugador")) {
+        if (this.getRol().equals("Jugador") || this.getRol().equals("Player")) {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
                 Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
                 this.usuarioDao.create(user);
@@ -146,7 +146,7 @@ public class registroAction extends ActionSupport {
                 sesion.put("usuario", user);
                 return SUCCESS;
             }
-        }
+        }   
     }
 
     //Getter & Setter de los atributos
@@ -277,4 +277,6 @@ public class registroAction extends ActionSupport {
     public void setLadoDeJuego(String ladoDeJuego) {
         this.ladoDeJuego = ladoDeJuego;
     }
+
+   
 }

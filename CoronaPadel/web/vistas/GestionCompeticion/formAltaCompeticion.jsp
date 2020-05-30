@@ -24,19 +24,19 @@
             <div class="formulario" style="margin-left:20%;margin-right: 20%;">
             <s:form  action="creaCompeticionAction"  style="padding-left: 10px; border-left-width: 1px; border-left-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-top-width: 1px;border-top-style: solid;border-right-width: 1px;border-right-style: solid;">
                 <s:actionerror cssClass="error"></s:actionerror>
-                <s:label  key="competicion.nombre"></s:label><br>
+                <s:label  key="competicion.nombre"></s:label>:<br>
                 <s:textfield  name="nombre"></s:textfield><br>
-                <s:label  key="competicion.descripcion"></s:label><br>
+                <s:label  key="competicion.descripcion"></s:label>:<br>
                 <s:textarea   name="descripcion"></s:textarea><br>
-                <s:label   key="administracion.nombre"></s:label>
+                <s:label   key="administracion.nombre"></s:label>:
                 <s:select    name="idAdministracion" id="idAdministracion" list="administracion" listValue="%{nombre}" listKey="idAdministracion"></s:select><br>
-                <s:label key="competicion.privada"></s:label>
+                <s:label key="competicion.privada"></s:label>:
                 <s:checkbox  name="privada" fieldValue="true"></s:checkbox><br>
-                <s:label key="competicion.nParejas"></s:label>
+                <s:label key="competicion.nParejas"></s:label>:
                 <s:textfield   name="nparejas"></s:textfield><br>
-                <s:label  key="competicion.formato"></s:label>
+                <s:label  key="competicion.formato"></s:label>:
                 <s:select   id="formato" name="formato" list="formato"></s:select><br>
-                <s:label  key="competicion.fechaInicio"></s:label>
+                <s:label  key="competicion.fechaInicio"></s:label>:
                 <s:textfield  name="fechaInicio"></s:textfield><br>
                 <s:submit cssStyle="text-align:center;" key="competicion.crear"></s:submit>
             </s:form>

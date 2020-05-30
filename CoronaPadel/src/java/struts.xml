@@ -121,7 +121,9 @@
             <result name="success">/vistas/GestionCompeticion/completarCompeticion.jsp</result>
         </action>
         <action name="finCompletaCompeticionAction" class="Acciones.competicion.completaCompeticionAction" method="asignaParejas">
-            <result name="success">/vistas/index.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
             <result name="input">/vistas/GestionCompeticion/completarCompeticion.jsp</result>
         </action>
         <action name="gestionCompeticionAction" class="Acciones.competicion.gestionCompeticionAction">
@@ -165,7 +167,9 @@
             </result>
         </action>
         <action name="gestionPartidoAction" class="Acciones.competicion.gestionPartidoAction">
-            <result name="success">/vistas/index.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">cargarCompeticionesInscripcion</param>
+            </result>
         </action>
         <action name="mostrarModificarPartidoAction" class="Acciones.competicion.gestionPartidoAction" method="mostrarModificarPartidoAction">
             <result name="success">/vistas/GestionCompeticion/arbitroPartido.jsp</result>

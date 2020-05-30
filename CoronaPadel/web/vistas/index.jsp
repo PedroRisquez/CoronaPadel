@@ -90,7 +90,7 @@ text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usu
                     <s:else>
                         <s:submit key="Inscribirse" disabled="true"></s:submit>
                     </s:else>
-                </s:form>
+                </s:form><br/>
             </s:iterator>
         </div>
 

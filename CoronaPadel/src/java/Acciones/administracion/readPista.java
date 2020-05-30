@@ -42,7 +42,7 @@ public class readPista extends ActionSupport {
         this.listadoCubierta = new ArrayList<>();
         this.listadoPista = new ArrayList<>();
         this.listadoSuelo = new ArrayList<>();
-
+        
         switch (this.pista.getTipoDeCubierta()) {
             case "Exterior":
                 this.listadoCubierta.add(getText("pista.exterior"));
@@ -59,7 +59,7 @@ public class readPista extends ActionSupport {
                 this.listadoCubierta.add(getText("pista.exterior"));
                 this.listadoCubierta.add(getText("pista.semi"));
                 break;
-        }
+        } 
 
         switch (this.pista.getTipoDePista()) {
             case "Muro":

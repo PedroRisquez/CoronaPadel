@@ -79,7 +79,7 @@ public class gestionCompeticionAction extends ActionSupport {
     public String execute() throws Exception {
         sesion = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario)sesion.get("usuario");
-        this.setListaCompeticion(competicionDAO.listarPorAdministrador(usuario.getDni()));
+        this.setListaCompeticion(competicionDAO.listarPorAdministrador(usuario.getDni()));        
         return SUCCESS;
     }
 

@@ -71,6 +71,7 @@ public class ParejaDAO implements IParejaDAO{
         tx.commit();
         return listaDeParejaDadoUsuario;
     }
+    
     public Pareja parejasDadoUsuarios(String dni1,String dni2) {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();

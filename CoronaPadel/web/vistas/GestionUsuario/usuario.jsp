@@ -31,7 +31,7 @@ text-align: center;"><s:text name="miPerfil"></s:text> <s:property value="#usuar
             <h4><s:text name="sinFoto"></s:text></h4>
         </s:else>
         <h2 style="background-color:#ddd7c8;margin-right: 800px;
-text-align: center;">Datos</h2>
+text-align: center;"><s:text name="datos"></h2>
         <table border="1">
             <thead>
                 <tr>
@@ -71,6 +71,9 @@ text-align: center;">Datos</h2>
             <s:form action="irParejas">
                 <s:submit key="misParejas"></s:submit>
             </s:form>  
+            <s:form action="competicionesJugador">
+                <s:submit key="misCompeticiones"></s:submit>
+            </s:form>
         </s:if>
         </div>
         <s:include value="../footer.jsp"></s:include>

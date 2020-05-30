@@ -19,7 +19,7 @@
         <body>
         <s:set name="usuario" value="%{#session.usuario}"></s:set>
         <s:include value="header.jsp"></s:include>  
-        <s:if test="#usuario.rol=='Arbitro'">
+        <s:if test="#usuario.rol=='Arbitro' || #usuario.rol=='Referee'">
             <div style="padding-left: 170px;padding-top: 10%;margin-bottom: 20%;">
             <s:if test="!listaDePartidosArbitro.isEmpty()">
                 <s:action name="gestionPartidoAction"></s:action>
@@ -84,7 +84,7 @@ text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usu
                <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="administracion.nombre"></s:property><br/></div>
                <s:form action="inscribirse1Action" cssClass="margin-top: 20px;">
                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
-                    <s:if test="%{#usuario.rol=='Jugador'}">
+                    <s:if test="#usuario.rol=='Jugador' || #usuario.rol=='Player'">
                         <s:submit key="Inscribirse"></s:submit>
                     </s:if>
                     <s:else>

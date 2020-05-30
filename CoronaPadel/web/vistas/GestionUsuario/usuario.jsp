@@ -31,7 +31,7 @@ text-align: center;"><s:text name="miPerfil"></s:text> <s:property value="#usuar
             <h4><s:text name="sinFoto"></s:text></h4>
         </s:else>
         <h2 style="background-color:#ddd7c8;margin-right: 800px;
-text-align: center;"><s:text name="datos"></h2>
+            text-align: center;"><s:text name="datos"></s:text></h2>
         <table border="1">
             <thead>
                 <tr>

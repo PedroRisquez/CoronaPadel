@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="jquery-1.12.4.min.js" type="text/javascript"></script>
+        <script src="../vistas/jquery-1.12.4.min.js" type="text/javascript"></script>
         <link rel="icon" href="<s:url value='/vistas/trophy.png'></s:url>" type="image/png"/>
         <link href="<s:url value='/design/design.css'></s:url>" rel="stylesheet" type="text/css"/>
         <title><s:text name="registro.usuario"></s:text></title>
@@ -55,10 +55,10 @@
 
     </head>
     <body>
-        <div class="containerR">
+       <div class="containerR" style="padding-bottom: 200px;">
             <div class="block-heading">
                 <h2 class="text-info"><s:text name="form.registro"></s:text></h2></div>
-        <s:form action="registroAction" method="POST" enctype = "multipart/form-data" cssStyle="height: 500px;">
+        <s:form action="registroAction" method="POST" enctype = "multipart/form-data" cssStyle="height: 500px; padding-bottom: 100px;">
                     <s:actionerror cssClass="error"></s:actionerror>
                     <div class="one-half">
                     <div class="form-groupReg"> 
@@ -106,8 +106,7 @@
                     <s:radio cssStyle="font-size:12px;" cssClass="radio" label="Lado de juego: " name="ladoDeJuego"  list="listaDeLadoDeJuego"></s:radio><br/>
                     </div>
                     </div>
-                    <s:submit cssClass="btn btn-primary btn-block" cssStyle="padding-top: 4px;
-margin-top: 100px;" key="Register"></s:submit>
+                    <s:submit cssClass="btn btn-primary btn-block" cssStyle="padding-top: 4px;margin-top: 0px;" key="Register"></s:submit>
             </s:form>
         </div>
     </body>

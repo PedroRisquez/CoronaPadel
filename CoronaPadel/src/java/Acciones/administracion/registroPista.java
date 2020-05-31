@@ -45,7 +45,7 @@ public class registroPista extends ActionSupport {
      */
     @Override
     public void validate() {
-        String p = "^[A-Za-z ]*$";
+        String p = "^[A-Za-z0-9 ]*$";
         Pattern patron = Pattern.compile(p);
         Matcher m = patron.matcher(getLocalizacion());
 

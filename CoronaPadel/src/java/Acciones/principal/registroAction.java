@@ -9,6 +9,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
@@ -49,9 +51,9 @@ public class registroAction extends ActionSupport {
     public registroAction() {
     }
 
-  /**
-  * validate(): método para validar los campos recogidos en el formulario
-  */
+    /**
+     * validate(): método para validar los campos recogidos en el formulario
+     */
     public void validate() {
         if (this.getNombreCompleto().equals("")) {
             addActionError(getText("competicion.nombre.requerido"));
@@ -72,8 +74,16 @@ public class registroAction extends ActionSupport {
         if (this.getClave().equals("")) {
             addActionError(getText("usuario.clave.requerida"));
         }
-        if (this.getEmail().equals("")) {//expresionreg email
+        String p = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\n"
+                + "1\n"
+                + "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        Pattern patron = Pattern.compile(p);
+        Matcher m = patron.matcher(this.getEmail());
+
+        if (this.getEmail().equals("")) {
             addActionError(getText("usuario.email.requerido"));
+        } else if (!m.matches()) {
+            addActionError(getText("email.reg"));
         }
         if (this.getSexo() == null) {
             addActionError(getText("usuario.sexo.required"));
@@ -118,35 +128,35 @@ public class registroAction extends ActionSupport {
         if (this.fotoPerfil != null && this.fotoPerfilFileName != null) {
             String filePath = ServletActionContext.getServletContext().getRealPath("/");
             System.out.println("Ruta de la imagen:" + filePath);
-            File archivoACrear = new File(filePath+"img", this.fotoPerfilFileName);
+            File archivoACrear = new File(filePath + "img", this.fotoPerfilFileName);
             FileUtils.copyFile(this.fotoPerfil, archivoACrear);
         }
 
         if (this.getRol().equals("Jugador") || this.getRol().equals("Player")) {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.cifraPass(this.getClave()), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.cifraPass(this.getClave()), this.getEmail(), this.getSexo(), this.getRol(), this.getCategoria(), this.getLadoDeJuego(), this.getFotoPerfilFileName());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             }
         } else {
             if (this.fotoPerfil == null && this.fotoPerfilFileName == null) {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.cifraPass(this.getClave()), this.getEmail(), this.getSexo(), this.getRol());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             } else {
-                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.openFileToString(cifrado.cifra(this.getClave())), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
+                Usuario user = new Usuario(this.getDni(), this.getNombreCompleto(), this.getUsuario(), cifrado.cifraPass(this.getClave()), this.getEmail(), this.getSexo(), this.getRol(), this.getFotoPerfilFileName());
                 this.usuarioDao.create(user);
                 sesion.put("usuario", user);
                 return SUCCESS;
             }
-        }   
+        }
     }
 
     //Getter & Setter de los atributos
@@ -278,5 +288,4 @@ public class registroAction extends ActionSupport {
         this.ladoDeJuego = ladoDeJuego;
     }
 
-   
 }

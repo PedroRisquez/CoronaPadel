@@ -5,62 +5,51 @@
  */
 package encrypt;
 
-import java.security.MessageDigest;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.WebTarget;
 
 /**
+ * Jersey REST client generated for REST resource:GenericResource [generic]<br>
+ * USAGE:
+ * <pre>
+ *        Encrypt client = new Encrypt();
+ *        Object response = client.XXX(...);
+ *        // do whatever with response
+ *        client.close();
+ * </pre>
  *
  * @author pedro
  */
 public class Encrypt {
 
-    public byte[] cifra(String sinCifrar) throws Exception {
-        final byte[] bytes = sinCifrar.getBytes("UTF-8");
-        final Cipher aes = obtieneCipher(true);
-        final byte[] cifrado = aes.doFinal(bytes);
-        return cifrado;
+    private WebTarget webTarget;
+    private Client client;
+    private static final String BASE_URI = "http://localhost:8080/EncriptaClaveWS/webresources";
+
+    public Encrypt() {
+        client = javax.ws.rs.client.ClientBuilder.newClient();
+        webTarget = client.target(BASE_URI).path("generic");
     }
 
-    public String descifra(byte[] cifrado) throws Exception {
-        final Cipher aes = obtieneCipher(false);
-        final byte[] bytes = aes.doFinal(cifrado);
-        final String sinCifrar = new String(bytes, "UTF-8");
-        return sinCifrar;
-    }
-
-    private Cipher obtieneCipher(boolean paraCifrar) throws Exception {
-        final String frase = "CoronaPadel2020";
-        final MessageDigest digest = MessageDigest.getInstance("SHA");
-        digest.update(frase.getBytes("UTF-8"));
-        final SecretKeySpec key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
-
-        final Cipher aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        if (paraCifrar) {
-            aes.init(Cipher.ENCRYPT_MODE, key);
-        } else {
-            aes.init(Cipher.DECRYPT_MODE, key);
+    public String cifraPass(String clave) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        if (clave != null) {
+            resource = resource.queryParam("clave", clave);
         }
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+    }
 
-        return aes;
+    public String descifraHTML(String claveCifrada) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        if (claveCifrada != null) {
+            resource = resource.queryParam("claveCifrada", claveCifrada);
+        }
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+    }
+
+    public void close() {
+        client.close();
     }
     
-    
-    public String openFileToString(byte[] _bytes) {
-        String file_string = "";
-
-        for (int i = 0; i < _bytes.length; i++) {
-            file_string += (char) _bytes[i];
-        }
-
-        return file_string;
-    }
-    
-    public byte[] StringToByte(String string){
-        byte[] cifrado = new byte[string.length()];
-        for (int i = 0; i < string.length(); i++) {
-            cifrado[i] = (byte)string.charAt(i);
-        }
-        return cifrado;
-    }
 }

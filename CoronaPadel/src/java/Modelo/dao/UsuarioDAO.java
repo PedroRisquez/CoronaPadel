@@ -68,7 +68,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         Usuario u = (Usuario) q.uniqueResult();
         tx.commit();
         if (u != null) {
-            String desencriptada = cifrado.descifra(cifrado.StringToByte(u.getClave()));
+            String desencriptada = cifrado.descifraHTML(u.getClave());
             if (desencriptada.equals(clave)) {
                 return u;
             } else {
@@ -84,7 +84,7 @@ public class UsuarioDAO implements IUsuarioDAO {
     public List<Usuario> leerJugadores() {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
-        Query q = sesion.createQuery("From Usuario where rol = 'Jugador'");
+        Query q = sesion.createQuery("From Usuario where rol = 'Jugador' or rol = 'Player'");
         List<Usuario> listaDeJugador = (List<Usuario>) q.list();
         tx.commit();
         return listaDeJugador;
@@ -104,7 +104,7 @@ public class UsuarioDAO implements IUsuarioDAO {
     public List<Usuario> listarArbitros() {
         sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
-        Query q = sesion.createQuery("From Usuario where rol='Arbitro'");
+        Query q = sesion.createQuery("From Usuario where rol='Arbitro' or rol = 'Referee'");
         List<Usuario> listaDeUsuario = (List<Usuario>) q.list();
         tx.commit();
         return listaDeUsuario;

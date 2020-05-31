@@ -88,7 +88,7 @@ text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usu
                         <s:submit key="inscribirse"></s:submit>
                     </s:if>
                     <s:else>
-                        <s:submit key="nscribirse" disabled="true"></s:submit>
+                        <s:submit key="inscribirse" disabled="true"></s:submit>
                     </s:else>
                 </s:form><br/>
             </s:iterator>

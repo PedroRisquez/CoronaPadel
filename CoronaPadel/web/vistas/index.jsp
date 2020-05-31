@@ -77,7 +77,7 @@ text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usu
             </s:if>
                 </div>
         </s:if>
-        <div id="inscripciones">
+        <div id="inscripciones" style="padding-bottom: 284px;">
             <s:iterator value="listaDeCompeticionesDisponibles">
                 <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="nombre"></s:property><br/></div>
                 <div class="competicion" style="border-top-width: 1px;border-top-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-width: 1px;border-left-style: solid;border-right-width: 1px;border-right-style: solid;"><s:property value="descripcion"></s:property><br/></div>

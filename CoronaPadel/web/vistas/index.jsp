@@ -85,10 +85,10 @@ text-align: center;"><s:text name="partidosde"></s:text> <s:property value="#usu
                <s:form action="inscribirse1Action" cssClass="margin-top: 20px;">
                     <s:hidden name="idCompeticion" value="%{idCompeticion}"></s:hidden>
                     <s:if test="#usuario.rol=='Jugador' || #usuario.rol=='Player'">
-                        <s:submit key="Inscribirse"></s:submit>
+                        <s:submit key="inscribirse"></s:submit>
                     </s:if>
                     <s:else>
-                        <s:submit key="Inscribirse" disabled="true"></s:submit>
+                        <s:submit key="nscribirse" disabled="true"></s:submit>
                     </s:else>
                 </s:form><br/>
             </s:iterator>
